@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StatsSection from './components/StatsSection';
@@ -7,10 +7,36 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Insights from './components/Insights';
 import Footer from './components/Footer';
+import Lenis from 'lenis';
 
 function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white overflow-hidden font-sans text-gray-900">
+    <div className="min-h-screen bg-transparent selection:bg-primary-300 selection:text-black">
       <Navbar />
       <Hero />
       <StatsSection />

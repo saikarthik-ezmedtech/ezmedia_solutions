@@ -25,38 +25,45 @@ const FAQ = () => {
     ];
 
     return (
-        <section className="py-20 bg-white">
-            <div className="container mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16">
+        <section className="py-24 bg-transparent text-gray-950">
+            <div className="container mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-start">
 
                 <div>
-                    <h2 className="text-4xl font-bold mb-6 uppercase">Digital Marketing FAQ</h2>
-                    <p className="text-gray-500 mb-8">(Healthcare Specific)</p>
-                    <p className="text-gray-600 mb-8 max-w-md">
+                    <span className="inline-block px-4 py-1.5 bg-black/5 text-gray-900 rounded-full text-[13px] font-medium mb-6 uppercase tracking-[0.1em]">
+                        FAQ
+                    </span>
+                    <h2 className="text-[28px] md:text-[34px] lg:text-[44px] font-semibold mb-8 leading-[1.2] tracking-[-0.01em]">
+                        Digital Marketing FAQ <br />
+                        <span className="text-gray-400">(Healthcare Specific)</span>
+                    </h2>
+                    <p className="text-gray-500 text-sm md:text-[15px] lg:text-base mb-10 max-w-md leading-[1.55] font-normal">
                         We help clinics understand digital growth strategies through transparent guidance and measurable results.
                     </p>
 
-                    <div className="flex gap-4">
-                        <button className="px-6 py-2 rounded-full border border-black font-medium hover:bg-black hover:text-white transition-colors">
+                    <div className="flex gap-6">
+                        <button className="px-8 py-3 rounded-full border border-gray-900 font-medium hover:bg-black hover:text-white transition-all text-[14px] tracking-[0.005em]">
                             More Questions
                         </button>
-                        <button className="px-6 py-2 rounded-full border border-transparent font-medium hover:underline">
+                        <button className="px-8 py-3 rounded-full border border-transparent font-medium hover:underline transition-all text-[14px] tracking-[0.005em]">
                             Contact Us
                         </button>
                     </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-2">
                     {faqs.map((faq, index) => (
-                        <div key={index} className="border-b border-gray-200 pb-4">
+                        <div key={index} className="border-b border-gray-900/5 pb-2">
                             <button
                                 onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                                className="w-full flex justify-between items-center py-4 text-left group"
+                                aria-expanded={activeIndex === index}
+                                aria-label={`Toggle answer for: ${faq.question}`}
+                                className="w-full flex justify-between items-center py-6 text-left group"
                             >
-                                <span className="text-lg font-medium group-hover:text-primary-600 transition-colors">
+                                <span className="text-[18px] md:text-[20px] lg:text-[22px] font-medium text-gray-950 leading-[1.3] pr-8 group-hover:text-primary-600 transition-colors">
                                     {faq.question}
                                 </span>
-                                <span className="text-gray-400">
-                                    {activeIndex === index ? <FaMinus size={12} /> : <FaPlus size={12} />}
+                                <span className={`text-gray-400 transition-transform duration-300 ${activeIndex === index ? 'rotate-180' : ''}`}>
+                                    {activeIndex === index ? <FaMinus size={14} /> : <FaPlus size={14} />}
                                 </span>
                             </button>
 
@@ -68,7 +75,7 @@ const FAQ = () => {
                                         exit={{ height: 0, opacity: 0 }}
                                         className="overflow-hidden"
                                     >
-                                        <p className="text-gray-600 pb-4 text-sm leading-relaxed">
+                                        <p className="text-gray-500 pb-6 text-sm md:text-[15px] lg:text-base leading-[1.55] font-normal">
                                             {faq.answer}
                                         </p>
                                     </motion.div>

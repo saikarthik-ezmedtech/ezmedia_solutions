@@ -7,63 +7,27 @@ const CTA = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="py-24 bg-gray-50 relative overflow-hidden" ref={ref}>
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-primary-200/20 to-purple-200/20 rounded-full blur-3xl"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="contact" className="py-24 bg-transparent relative overflow-hidden" ref={ref}>
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="relative bg-gradient-to-br from-primary-600 via-purple-600 to-pink-600 rounded-3xl p-12 md:p-16 overflow-hidden shadow-2xl"
+          className="relative bg-gray-950 rounded-[3rem] p-12 md:p-16 lg:p-24 overflow-hidden shadow-2xl"
         >
-          {/* Animated background pattern */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute inset-0 opacity-10">
-              {[...Array(20)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-white rounded-full"
-                  style={{
-                    top: `${Math.random() * 100}%`,
-                    left: `${Math.random() * 100}%`,
-                  }}
-                  animate={{
-                    y: [0, -30, 0],
-                    opacity: [0.3, 1, 0.3],
-                  }}
-                  transition={{
-                    duration: 3 + Math.random() * 2,
-                    repeat: Infinity,
-                    delay: Math.random() * 2,
-                  }}
-                />
-              ))}
-            </div>
+          {/* Subtle medical grid/pattern background */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 bg-[radial-gradient(#bef264_1px,transparent_1px)] [background-size:40px_40px]"></div>
           </div>
 
-          <div className="relative z-10 text-center">
+          <div className="relative z-10 text-center max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-semibold mb-6">
-                🚀 Ready to Start?
+              <span className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-sm text-primary-300 rounded-full text-[13px] font-medium mb-8 uppercase tracking-[0.1em]">
+                Ready to Grow?
               </span>
             </motion.div>
 
@@ -71,72 +35,63 @@ const CTA = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+              className="text-[28px] md:text-[34px] lg:text-[52px] font-semibold text-white mb-8 leading-[1.2] tracking-[-0.01em]"
             >
-              Let's Build Something
-              <br />
-              <span className="text-white/90">Amazing Together</span>
+              Let's Scale Your Clinic <br />
+              <span className="text-gray-400">With Predictable Systems</span>
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-white/90 mb-10 max-w-2xl mx-auto"
+              className="text-gray-400 text-sm md:text-[15px] lg:text-base mb-12 max-w-2xl mx-auto leading-[1.55] font-normal"
             >
-              Transform your digital presence with our expert team. Let's discuss your project and make your vision a reality.
+              Transform your digital presence with our expert team specializing in medical growth. Let's discuss your project and make your vision a reality.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-primary-600 px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-2 group"
+                className="bg-primary-300 text-black px-10 py-4 rounded-full font-medium text-[14px] shadow-xl hover:bg-white transition-all duration-300 flex items-center gap-3 group tracking-[0.005em]"
               >
                 Get Started Now
-                <motion.span
-                  className="group-hover:translate-x-1 transition-transform duration-300"
-                >
-                  <HiArrowRight size={20} />
-                </motion.span>
+                <HiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </motion.button>
 
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300"
+                className="bg-transparent border border-white/20 text-white px-10 py-4 rounded-full font-medium text-[14px] hover:bg-white/10 transition-all duration-300 tracking-[0.005em]"
               >
-                Schedule a Call
+                View Case Studies
               </motion.button>
             </motion.div>
 
-            {/* Trust badges */}
+            {/* Trust markers */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-12 flex flex-wrap justify-center items-center gap-8 text-white/80"
+              className="mt-16 flex flex-wrap justify-center items-center gap-10 text-white/40"
             >
               <div className="flex items-center gap-2">
-                <span className="text-2xl">⚡</span>
-                <span>Fast Delivery</span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em]">Verified Results</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl">🎯</span>
-                <span>100% Quality</span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em]">Medical Specialized</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl">🔒</span>
-                <span>Secure & Safe</span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em]">Data Driven</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl">💎</span>
-                <span>Premium Support</span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em]">24/7 Support</span>
               </div>
             </motion.div>
           </div>
