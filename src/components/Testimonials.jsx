@@ -1,112 +1,78 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaQuoteLeft, FaChevronRight } from 'react-icons/fa';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const Testimonials = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
     const testimonials = [
         {
-            id: 1,
-            quote: "Ezmedia solutions completely transformed our patient acquisition system. Their SEO, ads, and AI automation helped us scale faster than any previous agency.",
-            name: "Dr. Ramesh Kumar",
-            position: "Founder, Prime Dental Care",
-            image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop"
+            quote: "EzMedia transformed our patient acquisition. We saw 300% ROI in just 3 months.",
+            author: "Dr. Sarah Johnson",
+            role: "Ortho Care Dental",
+            rating: 5
         },
         {
-            id: 2,
-            quote: "Their data-driven approach to healthcare marketing is unmatched. We've seen a 300% increase in qualified patient leads within just 4 months of working with Ezmedia.",
-            name: "Dr. Priya Sharma",
-            position: "CEO, HealthFirst Medical Group",
-            image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop"
+            quote: "Their AI automation system handles our bookings 24/7. Game changer for our practice.",
+            author: "Dr. Michael Chen",
+            role: "Family Health Clinic",
+            rating: 5
         },
         {
-            id: 3,
-            quote: "The ROI we've achieved with Ezmedia's strategies is exceptional. Their team understands the healthcare industry deeply and delivers results that matter.",
-            name: "Dr. Vikram Patel",
-            position: "Director, Advanced Dental Clinic",
-            image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=2064&auto=format&fit=crop"
+            quote: "Finally, a marketing agency that understands healthcare. Results speak for themselves.",
+            author: "Dr. Emily Rodriguez",
+            role: "Wellness Medical Center",
+            rating: 5
         }
     ];
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            handleNext();
-        }, 5000);
-        return () => clearInterval(timer);
-    }, [currentIndex]);
-
-    const handleNext = () => {
-        setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-    };
-
-    const currentTestimonial = testimonials[currentIndex];
-
     return (
-        <section id="solutions" className="py-24 bg-transparent text-gray-950">
-            <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-12 md:py-16 bg-white border-t border-gray-100" id="testimonials">
+            <div className="container mx-auto px-6 lg:px-12 max-w-[1440px]">
+                <div className="mb-16 text-center">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        className="text-xs font-black text-[#00C853] uppercase tracking-[0.4em] mb-4"
+                    >
+                        Testimonials
+                    </motion.h2>
+                    <motion.h3
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-gray-900"
+                    >
+                        What Clients Say
+                    </motion.h3>
+                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    className="max-w-4xl mx-auto text-center p-12 lg:p-20 bg-white/50 backdrop-blur-sm rounded-[3rem] border border-white/20 shadow-sm"
-                >
-                    <FaQuoteLeft className="text-4xl text-black/10 mx-auto mb-10" />
-
-                    <AnimatePresence mode="wait">
+                <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+                    {testimonials.map((item, index) => (
                         <motion.div
-                            key={currentTestimonial.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
+                            key={index}
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: index * 0.2 }}
+                            viewport={{ once: true }}
+                            className="bg-gray-50 p-8 md:p-10 relative hover:-translate-y-2 hover:shadow-xl transition-transform duration-300 rounded-xl"
                         >
-                            <h3 className="text-[22px] md:text-[26px] lg:text-[32px] font-semibold leading-[1.25] tracking-[-0.005em] mb-12">
-                                "{currentTestimonial.quote}"
-                            </h3>
-
-                            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-                                <div className="flex items-center gap-4 text-left">
-                                    <img
-                                        src={currentTestimonial.image}
-                                        alt={currentTestimonial.name}
-                                        className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm"
-                                    />
-                                    <div>
-                                        <h4 className="text-[18px] md:text-[20px] font-medium text-gray-950 leading-[1.3]">{currentTestimonial.name}</h4>
-                                        <p className="text-gray-500 text-[13px] font-normal leading-[1.5]">{currentTestimonial.position}</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4">
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        onClick={handleNext}
-                                        className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-all shadow-lg"
-                                    >
-                                        <FaChevronRight size={16} />
-                                    </motion.button>
-                                </div>
+                            <div className="flex gap-1 mb-6 text-[#00C853]">
+                                {[...Array(item.rating)].map((_, i) => (
+                                    <span key={i} className="text-lg">★</span>
+                                ))}
+                            </div>
+                            <p className="text-lg font-medium leading-relaxed mb-8 text-gray-800">
+                                "{item.quote}"
+                            </p>
+                            <div>
+                                <p className="font-black text-base uppercase tracking-wide mb-1 text-gray-900">
+                                    {item.author}
+                                </p>
+                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                                    {item.role}
+                                </p>
                             </div>
                         </motion.div>
-                    </AnimatePresence>
-
-                    {/* Dots indicator */}
-                    <div className="flex justify-center gap-2 mt-8">
-                        {testimonials.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentIndex(index)}
-                                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                                    ? 'bg-black w-8'
-                                    : 'bg-gray-300 hover:bg-gray-400'
-                                    }`}
-                            />
-                        ))}
-                    </div>
-                </motion.div>
-
+                    ))}
+                </div>
             </div>
         </section>
     );

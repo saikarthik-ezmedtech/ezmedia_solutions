@@ -3,77 +3,124 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --madison-red: #ED1C24;
+    --ez-green: #00C853;
+    --madison-black: #0A0A0A;
+    --madison-gray: #F5F5F7;
+    --accent-color: #00C853;
+    /* Success/Growth green */
+  }
+
   * {
     @apply border-border;
   }
 
   body {
     @apply text-gray-950;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Manrope', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
     line-height: 1.55;
     position: relative;
-    background-color: #f8f9fa;
+    background-color: #ffffff;
+    color: var(--madison-black);
   }
 
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/assets/main_bg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    backdrop-filter: blur(32px);
-    z-index: -1;
-    pointer-events: none;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
   }
 
   h1 {
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.015em;
+    font-size: clamp(3rem, 8vw, 7rem);
   }
 
   h2 {
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-  }
-
-  h3 {
-    font-weight: 600;
-    line-height: 1.25;
-    letter-spacing: -0.005em;
-  }
-
-  h4 {
-    font-weight: 500;
-    line-height: 1.3;
+    font-size: clamp(2rem, 5vw, 4rem);
   }
 
   p {
+    font-family: 'Manrope', sans-serif;
     font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
   }
 
   button,
   a {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Manrope', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
   }
 }
 
 @layer utilities {
+  .text-madison-red {
+    color: var(--madison-red);
+  }
+
+  .bg-madison-red {
+    background-color: var(--madison-red);
+  }
+
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-purple-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#ED1C24] to-[#B0141A];
   }
 
   .glass-effect {
     @apply backdrop-blur-md bg-white/30 border border-white/20;
+  }
+
+  .parallax-bg {
+    @apply absolute inset-0 -z-10 pointer-events-none;
+  }
+
+  /* User Requested Hero Implementation (FINAL) */
+  .hero-section {
+    position: relative;
+    height: 100vh;
+    background: #021612;
+    overflow: hidden;
+  }
+
+  #hero-lottie {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  #hero-lottie svg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 22, 18, 0.85);
+    z-index: 2;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+  }
+
+  .reveal-text {
+    overflow: hidden;
+    display: inline-block;
   }
 }
 
@@ -115,22 +162,24 @@ body {
   max-width: 100%;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Hidden to use Custom Component */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0px;
+  background: transparent;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+  background: transparent;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Hide scrollbar for carousel */

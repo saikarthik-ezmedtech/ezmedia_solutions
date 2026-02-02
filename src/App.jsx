@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import StatsSection from './components/StatsSection';
-import CaseStudies from './components/CaseStudies';
+import AboutVideo from './components/AboutVideo';
+import Services from './components/Services';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Insights from './components/Insights';
+import Clients from './components/Clients';
+import CustomScrollbar from './components/CustomScrollbar';
 import Footer from './components/Footer';
 import Lenis from 'lenis';
 
@@ -36,14 +38,15 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-transparent selection:bg-primary-300 selection:text-black">
+    <div className="min-h-screen bg-transparent selection:bg-primary-300 selection:text-black relative">
+      <CustomScrollbar />
       <Navbar />
       <Hero />
-      <StatsSection />
-      <CaseStudies />
+      <Services />
       <Testimonials />
       <FAQ />
       <Insights />
+      <Clients />
       <Footer />
     </div>
   );

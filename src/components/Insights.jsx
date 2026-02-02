@@ -1,144 +1,161 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaArrowRight } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiArrowRight, HiArrowLeft } from 'react-icons/hi';
 
 const Insights = () => {
-    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [page, setPage] = useState(0);
+    const itemsPerPage = 4;
 
-    const insights = [
+    const newsItems = [
         {
-            category: 'SEO Growth',
-            title: 'How Digital Marketing Grows Clinics',
-            description: 'Discover how strategic digital presence can transform your clinic\'s patient acquisition. Learn proven SEO techniques, local search optimization, and content strategies that drive consistent patient bookings and revenue growth for healthcare practices.',
-            accentColor: 'from-blue-500 to-cyan-500',
-            dotColor: 'bg-blue-500',
-            hoverBg: 'bg-blue-600',
-            textColor: 'text-white'
+            id: 1,
+            title: "AI-Driven Patient Scheduling: How Local Clinics Reduced No-Shows by 45% in Q1",
+            image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+            category: "REPORT",
+            action: "READ STUDY",
+            link: "#"
         },
         {
-            category: 'Featured',
-            title: 'Advanced SEO Strategies for Doctors & Clinics',
-            description: 'Latest 2024 insights on local SEO and medical schema implementation. Explore advanced techniques for ranking higher in Google search results, optimizing your Google Business Profile, and leveraging structured data to attract more qualified patient leads.',
-            accentColor: 'from-blue-500 to-cyan-500',
-            dotColor: 'bg-blue-500',
-            hoverBg: 'bg-indigo-600',
-            textColor: 'text-white'
+            id: 2,
+            title: "The Future of Digital Health: EzMedia's New 'Growth-First' Algorithm for Dental Practices",
+            image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=800",
+            category: "NEWS",
+            action: "VIEW ARTICLE",
+            link: "#"
         },
         {
-            category: 'AI Trends',
-            title: 'AI-Powered Search Solutions for Healthcare',
-            description: 'How AI is revolutionizing patient search behavior and clinic discovery. Understand the impact of AI-driven search engines, voice search optimization, and intelligent chatbots on patient engagement and how to adapt your marketing strategy accordingly.',
-            accentColor: 'from-blue-500 to-cyan-500',
-            dotColor: 'bg-blue-500',
-            hoverBg: 'bg-violet-600',
-            textColor: 'text-white'
+            id: 3,
+            title: "Scaling Your Practice: The ROI of Automated Patient Engagement Systems in 2026",
+            image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800",
+            category: "INSIGHTS",
+            action: "DOWNLOAD PDF",
+            link: "#"
+        },
+        {
+            id: 4,
+            title: "EzMedia Wins 'Best Healthcare AI Solution' at the Global Digital Excellence Awards",
+            image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
+            category: "AWARDS",
+            action: "READ MORE",
+            link: "#"
+        },
+        {
+            id: 5,
+            title: "Podcast: Dr. Sarah Chen on integrating AI tools without losing the human touch",
+            image: "https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?auto=format&fit=crop&q=80&w=800",
+            category: "PODCAST",
+            action: "LISTEN NOW",
+            link: "#"
+        },
+        {
+            id: 6,
+            title: "2026 Healthcare Marketing Trends Report: Video is King",
+            image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800",
+            category: "TRENDS",
+            action: "GET REPORT",
+            link: "#"
         }
     ];
 
+    const totalPages = Math.ceil(newsItems.length / itemsPerPage);
+    const displayedItems = newsItems.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
+
+    const nextSlide = () => {
+        setPage((prev) => (prev + 1) % totalPages);
+    };
+
+    const prevSlide = () => {
+        setPage((prev) => (prev - 1 + totalPages) % totalPages);
+    };
+
     return (
-        <section className="py-24 bg-transparent text-gray-950">
-            <div className="container mx-auto px-6 lg:px-12">
+        <section
+            className="py-12 md:py-16 bg-white relative overflow-hidden"
+            id="insights"
+        >
+            <div className="container mx-auto px-6 max-w-[1440px]">
+                {/* Visible Section Header */}
+                <h2 className="text-6xl md:text-[8rem] font-black text-gray-200 uppercase mb-5 leading-none tracking-tighter opacity-80" style={{ transform: 'translate3d(-8.5px, 0, 0)' }}>NEWS</h2>
 
-                <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-16">
-                    <h2 className="text-[28px] md:text-[34px] lg:text-[44px] font-semibold max-w-xl leading-[1.2] tracking-[-0.01em]">
-                        Healthcare Marketing Insights That Drive Growth
-                    </h2>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-2 px-8 py-3 rounded-full border border-gray-900/10 bg-white/50 backdrop-blur-sm hover:bg-black hover:text-white transition-all text-[14px] font-medium tracking-[0.005em]"
-                    >
-                        Read more <FaArrowRight size={12} />
-                    </motion.button>
-                </div>
+                {/* Header Controls */}
+                <div className="flex justify-between items-center mb-12">
+                    {/* Counter */}
+                    <div className="flex items-center gap-4">
+                        <span className="text-xl font-bold text-[#00C853]">{page + 1}</span>
+                        <span className="text-xl text-gray-300">/</span>
+                        <span className="text-xl text-gray-400">{totalPages}</span>
+                    </div>
 
-                <div className="grid md:grid-cols-3 gap-8 items-stretch">
-                    {insights.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
-                            onHoverStart={() => setHoveredIndex(index)}
-                            onHoverEnd={() => setHoveredIndex(null)}
-                            className="relative group cursor-pointer h-full"
+                    {/* Navigation Arrows */}
+                    <div className="flex gap-2">
+                        <button
+                            onClick={prevSlide}
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#00C853] hover:text-white transition-all group"
                         >
-                            <motion.div
-                                whileHover={{ y: -8 }}
-                                transition={{ duration: 0.3, ease: "easeOut" }}
-                                className={`p-8 rounded-3xl transition-all duration-500 border-2 flex flex-col justify-between h-full min-h-[380px] ${hoveredIndex === index
-                                    ? `${item.hoverBg} shadow-2xl border-transparent`
-                                    : 'bg-white/50 backdrop-blur-sm border-white/20 shadow-sm hover:shadow-xl'
-                                    }`}
-                            >
-                                <div>
-                                    <div className="flex items-center gap-2 mb-6">
-                                        <motion.span
-                                            animate={{
-                                                scale: hoveredIndex === index ? [1, 1.3, 1] : 1,
-                                            }}
-                                            transition={{ duration: 0.5 }}
-                                            className={`w-2 h-2 rounded-full ${item.dotColor}`}
-                                        />
-                                        <motion.span
-                                            animate={{
-                                                x: hoveredIndex === index ? 5 : 0,
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                            className={`text-[13px] font-normal uppercase tracking-[0.2em] ${hoveredIndex === index ? 'text-white/80' : 'text-gray-500'
-                                                }`}
-                                        >
-                                            {item.category}
-                                        </motion.span>
-                                    </div>
-                                    <h4 className={`text-[18px] md:text-[20px] lg:text-[22px] font-medium mb-4 leading-[1.3] ${hoveredIndex === index ? item.textColor : 'text-gray-950'
-                                        }`}>
-                                        {item.title}
-                                    </h4>
-                                    <p className={`text-[14px] md:text-[15px] lg:text-base leading-[1.55] font-normal mb-8 ${hoveredIndex === index ? 'text-white/90' : 'text-gray-500'
-                                        }`}>
-                                        {item.description}
-                                    </p>
-                                </div>
-
-                                <div className="flex justify-end">
-                                    <motion.button
-                                        whileHover={{ scale: 1.1, rotate: -45 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        transition={{ duration: 0.3 }}
-                                        aria-label={`Read article about ${item.title}`}
-                                        className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${hoveredIndex === index
-                                            ? `bg-white text-black border-transparent shadow-lg`
-                                            : 'border-gray-900/5 bg-white/50 hover:bg-black hover:text-white'
-                                            }`}
-                                    >
-                                        <motion.div
-                                            animate={{
-                                                x: hoveredIndex === index ? 2 : 0,
-                                                y: hoveredIndex === index ? -2 : 0,
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <FaArrowRight size={14} />
-                                        </motion.div>
-                                    </motion.button>
-                                </div>
-                            </motion.div>
-
-                            {/* Decorative gradient glow effect on hover */}
-                            {hoveredIndex === index && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 0.15 }}
-                                    exit={{ opacity: 0 }}
-                                    className={`absolute inset-0 -z-10 rounded-3xl blur-3xl bg-blue-500`}
-                                    style={{ transform: 'scale(0.9)' }}
-                                />
-                            )}
-                        </motion.div>
-                    ))}
+                            <HiArrowLeft size={18} />
+                        </button>
+                        <button
+                            onClick={nextSlide}
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#00C853] hover:text-white transition-all group"
+                        >
+                            <HiArrowRight size={18} />
+                        </button>
+                        <div className="ml-4 flex items-center gap-2">
+                            <span className="text-xs font-black tracking-widest text-[#00C853] uppercase">VIEW ALL</span>
+                            <div className="w-8 h-[1px] bg-[#00C853]/30" />
+                        </div>
+                    </div>
                 </div>
 
+                {/* News Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20 relative z-10">
+                    <AnimatePresence mode="wait">
+                        {displayedItems.map((item, idx) => (
+                            <motion.div
+                                key={item.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                className="group flex flex-col"
+                            >
+                                <div className="aspect-[4/3] overflow-hidden bg-gray-100 mb-6">
+                                    <img
+                                        src={item.image}
+                                        alt="News"
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                </div>
+                                <p className="text-sm font-medium text-gray-800 leading-relaxed mb-8 flex-1">
+                                    {item.title}
+                                </p>
+                                <a
+                                    href={item.link}
+                                    className="flex items-center gap-3 group/link"
+                                >
+                                    <span className="text-[10px] font-black tracking-[0.2em] text-[#00C853] uppercase">
+                                        {item.action}
+                                    </span>
+                                    <div className="w-6 h-6 rounded-full border border-[#00C853]/20 flex items-center justify-center group-hover/link:bg-[#00C853] transition-all">
+                                        <HiArrowRight className="text-[#00C853] group-hover/link:text-white" size={12} />
+                                    </div>
+                                </a>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </div>
+
+                {/* Parallax Background Ghost Text */}
+                <motion.div
+                    initial={{ x: -100 }}
+                    whileInView={{ x: 100 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="absolute -bottom-10 left-0 w-full pointer-events-none select-none -z-10 overflow-hidden"
+                >
+                    <h2 className="text-[12rem] md:text-[20rem] font-black text-[#f0f0f0]/80 uppercase leading-none tracking-tighter whitespace-nowrap">
+                        NEWS
+                    </h2>
+                </motion.div>
             </div>
         </section>
     );

@@ -1,216 +1,149 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+
+const workProjects = [
+    {
+        id: 1,
+        title: "Saffola - World Heart Day",
+        image: "https://cms.madisonindia.com/uploads/40_under_40_work_722_X506_508d790a82.jpg",
+        awards: { gold: 2, silver: 1 },
+        link: "https://youtu.be/nI94KnUd8-g"
+    },
+    {
+        id: 2,
+        title: "Blue Star Water Purifier",
+        image: "https://cms.madisonindia.com/uploads/blue_star_work_722_X506_208b4e852f_170fca2f3b.jpg",
+        awards: { gold: 1 },
+        link: "https://youtu.be/FWTT9M3CYoA"
+    },
+    {
+        id: 3,
+        title: "Kamaverse Campaign",
+        image: "https://cms.madisonindia.com/uploads/Kamaverse_Campaign_work_Thumbnail_722_X506_4e887fe544.jpg",
+        awards: { gold: 4, silver: 2, bronze: 2 },
+        link: "https://www.youtube.com/watch?v=l9EIm0zVXQk&t=8s"
+    },
+    {
+        id: 4,
+        title: "Tata IPL FAN Park",
+        image: "https://cms.madisonindia.com/uploads/Tata_IPL_Fan_Park_Work_Thumbnail_722_X506_eb26446bde.jpg",
+        awards: { gold: 1 },
+        link: "https://youtu.be/vfPVXztbjAk"
+    },
+    {
+        id: 5,
+        title: "Asian Paints Royale Glitz",
+        image: "https://cms.madisonindia.com/uploads/asian_paints_jawan_1_copy_work_722_X506_0f4b9fa60d.jpg",
+        awards: { gold: 1, silver: 2, bronze: 7 },
+        link: "https://youtu.be/K3lxEbY3sck"
+    }
+];
 
 const CaseStudies = () => {
-    const [activeTab, setActiveTab] = useState('All');
-    const scrollRef = useRef(null);
+    const sectionRef = React.useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"]
+    });
 
-    const tabs = ['All', 'Dental Clinics', 'Medical Clinics', 'SEO Growth', 'Ads Performance', 'ROI Growth'];
-
-    const allProjects = [
-        {
-            id: 1,
-            title: 'Dental Clinic 2024',
-            category: 'Dental Clinics',
-            image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop',
-            result: 'Patient Booking System'
-        },
-        {
-            id: 2,
-            title: 'Medical Center 2023',
-            category: 'Medical Clinics',
-            image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop',
-            result: 'Local SEO Optimization'
-        },
-        {
-            id: 3,
-            title: 'Ortho Care',
-            category: 'Dental Clinics',
-            image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2070&auto=format&fit=crop',
-            result: '300% ROI on Ads'
-        },
-        {
-            id: 4,
-            title: 'Family Health Clinic',
-            category: 'Medical Clinics',
-            image: 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=2091&auto=format&fit=crop',
-            result: '250% Patient Growth'
-        },
-        {
-            id: 5,
-            title: 'Cosmetic Dental Spa',
-            category: 'Dental Clinics',
-            image: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?q=80&w=2074&auto=format&fit=crop',
-            result: '400% Appointment Increase'
-        },
-        {
-            id: 6,
-            title: 'Wellness Clinic',
-            category: 'SEO Growth',
-            image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop',
-            result: '180% Revenue Boost'
-        },
-        {
-            id: 7,
-            title: 'Pediatric Dental',
-            category: 'Ads Performance',
-            image: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=2070&auto=format&fit=crop',
-            result: '500% Ad ROI'
-        },
-        {
-            id: 8,
-            title: 'Specialty Clinic',
-            category: 'ROI Growth',
-            image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2064&auto=format&fit=crop',
-            result: '350% Growth in 6 Months'
-        }
-    ];
-
-    // Filter projects based on active tab
-    const filteredProjects = activeTab === 'All'
-        ? allProjects
-        : allProjects.filter(project => project.category === activeTab);
-
-    // Auto-scroll effect with super smooth animation
-    useEffect(() => {
-        const scrollContainer = scrollRef.current;
-        if (!scrollContainer) return;
-
-        let isUserInteracting = false;
-        const scrollSpeed = 2; // Pixels per frame - increased for faster scrolling
-
-        // Pause auto-scroll when user is scrolling
-        const handleUserScroll = () => {
-            isUserInteracting = true;
-            clearTimeout(scrollContainer.userScrollTimeout);
-            scrollContainer.userScrollTimeout = setTimeout(() => {
-                isUserInteracting = false;
-            }, 2000); // Resume auto-scroll 2 seconds after user stops
-        };
-
-        const handleMouseEnter = () => {
-            isUserInteracting = true;
-        };
-
-        const handleMouseLeave = () => {
-            isUserInteracting = false;
-        };
-
-        scrollContainer.addEventListener('wheel', handleUserScroll);
-        scrollContainer.addEventListener('touchstart', handleUserScroll);
-        scrollContainer.addEventListener('mouseenter', handleMouseEnter);
-        scrollContainer.addEventListener('mouseleave', handleMouseLeave);
-
-        const autoScroll = setInterval(() => {
-            if (!isUserInteracting && scrollContainer) {
-                scrollContainer.scrollLeft += scrollSpeed;
-
-                // Reset to beginning for infinite loop
-                const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-                if (scrollContainer.scrollLeft >= maxScroll) {
-                    scrollContainer.scrollLeft = 0;
-                }
-            }
-        }, 16); // ~60fps for super smooth animation
-
-        return () => {
-            clearInterval(autoScroll);
-            scrollContainer.removeEventListener('wheel', handleUserScroll);
-            scrollContainer.removeEventListener('touchstart', handleUserScroll);
-            scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
-            scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    }, [filteredProjects.length]);
+    // Horizontal movement for the large background text
+    const xText = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
     return (
-        <section id="case-studies" className="py-20 bg-black text-white overflow-hidden relative">
-            {/* Bubble background */}
-            <div className="absolute inset-0 opacity-20">
-                <img src="/assets/bubbles_bg.png" alt="" className="w-full h-full object-cover" />
-            </div>
+        <section
+            ref={sectionRef}
+            className="py-32 bg-white relative overflow-hidden"
+        >
+            {/* LARGE BACKGROUND TEXT (Madison Style) */}
+            <motion.h2
+                style={{ x: xText }}
+                className="absolute top-10 left-0 text-[15rem] md:text-[25rem] font-black text-[#f0f0f0] uppercase leading-none select-none pointer-events-none tracking-tighter"
+            >
+                Work
+            </motion.h2>
 
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
-
-                <div className="mb-12">
-                    <h2 className="text-[28px] md:text-[34px] lg:text-[44px] font-semibold mb-8 text-center leading-[1.2] tracking-[-0.01em]">
-                        Real-world results from clinics we've helped scale
-                    </h2>
-
-                    {/* Filter Tabs */}
-                    <div className="flex flex-wrap justify-center gap-4 mb-12">
-                        {tabs.map((tab) => (
-                            <motion.button
-                                key={tab}
-                                onClick={() => setActiveTab(tab)}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                aria-label={`Filter by ${tab}`}
-                                className={`px-6 py-2 rounded-full border transition-all duration-300 text-[14px] font-medium tracking-[0.005em] ${activeTab === tab
-                                    ? 'bg-primary-300 text-black border-primary-300'
-                                    : 'bg-transparent text-gray-400 border-gray-700 hover:border-gray-500'
-                                    }`}
-                            >
-                                {tab}
-                            </motion.button>
-                        ))}
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <div className="flex justify-between items-end mb-16 px-4">
+                    <div>
+                        <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-black">
+                            Our <span className="text-secondary-500">Impact</span>
+                        </h2>
+                        <div className="w-20 h-1 bg-secondary-500 mt-4"></div>
                     </div>
+                    <a href="#" className="hidden md:flex items-center gap-4 text-xs font-black tracking-[0.4em] uppercase hover:text-secondary-500 transition-colors group">
+                        View All Work
+                        <div className="w-10 h-[1px] bg-black group-hover:bg-secondary-500 transition-colors"></div>
+                    </a>
                 </div>
 
-                {/* Carousel */}
-                <div className="relative">
-                    <div
-                        ref={scrollRef}
-                        className="flex gap-8 overflow-x-auto pb-8 scrollbar-hide scroll-smooth"
-                        style={{
-                            scrollBehavior: 'smooth',
-                            scrollbarWidth: 'none',
-                            msOverflowStyle: 'none'
-                        }}
-                    >
-                        {/* Intro Circle Card */}
-                        <div className="min-w-[300px] h-[400px] rounded-3xl border border-dark-700 flex items-center justify-center relative shrink-0 group cursor-pointer overflow-hidden">
-                            <div className="relative z-10 w-32 h-32 rounded-full bg-primary-300 flex items-center justify-center text-black font-bold group-hover:scale-110 transition-transform duration-300">
-                                See Details
+                <div className="flex gap-10 overflow-x-auto pb-10 px-4 scrollbar-hide snap-x">
+                    {workProjects.map((project, index) => (
+                        <motion.div
+                            key={project.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="min-w-[300px] md:min-w-[450px] shrink-0 snap-center group"
+                        >
+                            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100">
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                />
+
+                                {project.awards && (
+                                    <div className="absolute bottom-6 right-6 bg-black/80 backdrop-blur-md p-4 flex flex-col items-center min-w-[100px] rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                        <p className="text-[10px] font-black uppercase text-white/50 tracking-widest mb-2 border-b border-white/10 pb-2 w-full text-center">Awards</p>
+                                        <div className="flex gap-4">
+                                            {project.awards.gold && (
+                                                <div className="text-center">
+                                                    <p className="text-xl font-black text-amber-400 leading-none">{project.awards.gold}</p>
+                                                    <p className="text-[8px] uppercase font-bold text-white/40">Gold</p>
+                                                </div>
+                                            )}
+                                            {project.awards.silver && (
+                                                <div className="text-center">
+                                                    <p className="text-xl font-black text-gray-300 leading-none">{project.awards.silver}</p>
+                                                    <p className="text-[8px] uppercase font-bold text-white/40">Silver</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className="absolute inset-0 bg-secondary-500/0 group-hover:bg-secondary-500/10 transition-colors duration-500"></div>
                             </div>
-                            {/* Decorative elements */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-dark-600 rounded-full opacity-30"></div>
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 border border-dark-700 rounded-full opacity-20"></div>
-                        </div>
 
-                        {/* Project Cards - Duplicated for seamless loop */}
-                        <AnimatePresence mode="popLayout">
-                            {[...filteredProjects, ...filteredProjects].map((project, index) => (
-                                <motion.div
-                                    key={`${project.id}-${index}-${activeTab}`}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.8 }}
-                                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                                    whileHover={{ y: -10 }}
-                                    className="min-w-[350px] h-[400px] rounded-3xl relative overflow-hidden shrink-0 group cursor-pointer"
-                                >
-                                    <img
-                                        src={project.image}
-                                        alt={`Case study for ${project.title}`}
-                                        loading="lazy"
-                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-
-                                    <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-md px-4 py-1 rounded-full text-[13px] border border-white/10 font-normal">
+                            <div className="mt-8 flex justify-between items-start">
+                                <div>
+                                    <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-black group-hover:text-secondary-500 transition-colors">
                                         {project.title}
-                                    </div>
-
-                                    <div className="absolute bottom-8 left-8 right-8">
-                                        <h3 className="text-[22px] md:text-[26px] lg:text-[32px] font-semibold mb-2 leading-[1.25] tracking-[-0.005em]">{project.result}</h3>
-                                        <div className="h-1 w-0 bg-primary-300 group-hover:w-full transition-all duration-500"></div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                    </div>
+                                    </h3>
+                                    <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-gray-400 mt-2">Marketing Campaign</p>
+                                </div>
+                                <a
+                                    href={project.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="w-12 h-12 flex items-center justify-center border border-gray-200 rounded-full group-hover:bg-black group-hover:border-black transition-all duration-300"
+                                >
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="rotate-[-45deg] group-hover:text-white transition-colors">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </a>
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
 
+                <div className="mt-16 md:hidden px-4">
+                    <a href="#" className="flex items-center gap-4 text-xs font-black tracking-[0.4em] uppercase text-secondary-500">
+                        View All Work
+                        <div className="w-10 h-[1px] bg-secondary-500"></div>
+                    </a>
+                </div>
             </div>
         </section>
     );
