@@ -5,20 +5,20 @@
 @layer base {
   :root {
     --madison-red: #ED1C24;
-    --ez-green: #00C853;
+    --ez-green: #81BC65;
     --madison-black: #0A0A0A;
     --madison-gray: #F5F5F7;
-    --accent-color: #00C853;
+    --accent-color: #81BC65;
     /* Success/Growth green */
   }
 
   * {
-    @apply border-border;
+    border-color: theme('colors.border');
   }
 
   body {
     @apply text-gray-950;
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Glacial Indifference', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
@@ -34,7 +34,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Glacial Indifference', sans-serif;
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.03em;
@@ -90,7 +90,7 @@
   .hero-section {
     position: relative;
     height: 100vh;
-    background: #021612;
+    background: #020504;
     overflow: hidden;
   }
 

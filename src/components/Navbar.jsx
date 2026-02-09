@@ -97,19 +97,13 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 transform ${scrolled ? 'bg-[#021612] py-4 shadow-xl' : 'bg-[#021612] py-6'
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 transform ${scrolled ? 'bg-[#020504]/80 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent py-8'
           } ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
       >
         <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center relative">
           {/* Hamburger Menu - Left */}
           {/* Left: Hamburger & Logo */}
           <div className="flex items-center gap-4 md:gap-6 z-50">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-[#00C853] transition-colors"
-            >
-              <HiMenuAlt4 size={28} />
-            </button>
             <AnimatePresence>
               {!pastHero && (
                 <motion.div
@@ -118,10 +112,16 @@ const Navbar = () => {
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Logo className="h-8 md:h-10 w-auto" showText={false} />
+                  <Logo className="h-10 md:h-14 w-auto" showText={false} />
                 </motion.div>
               )}
             </AnimatePresence>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white hover:text-[#81BC65] transition-colors"
+            >
+              <HiMenuAlt4 size={28} />
+            </button>
           </div>
 
           {/* Center Text - EZMEDIA SOLUTIONS (Shows only when past hero) */}
@@ -135,7 +135,7 @@ const Navbar = () => {
                 className="absolute left-1/2 cursor-pointer"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
-                <Logo className="h-10 md:h-12 w-auto" showText={true} />
+                <Logo className="h-14 md:h-18 w-auto" showText={true} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -143,7 +143,7 @@ const Navbar = () => {
           {/* Search Icon - Right */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="text-white hover:text-[#00C853] transition-colors"
+            className="text-white hover:text-[#81BC65] transition-colors"
           >
             <HiSearch size={24} />
           </button>
@@ -157,11 +157,11 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-[#021612] z-[100] flex items-center justify-center px-6"
+            className="fixed inset-0 bg-[#020504] z-[100] flex items-center justify-center px-6"
           >
             <button
               onClick={() => setIsSearchOpen(false)}
-              className="absolute top-8 right-8 text-white hover:text-[#00C853] transition-colors z-[110]"
+              className="absolute top-8 right-8 text-white hover:text-[#81BC65] transition-colors z-[110]"
             >
               <HiX size={32} />
             </button>
@@ -170,10 +170,10 @@ const Navbar = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="relative border-b-2 border-white/20 focus-within:border-[#00C853] transition-colors duration-300"
+                className="relative border-b-2 border-white/20 focus-within:border-[#81BC65] transition-colors duration-300"
               >
-                <div onClick={handleSearchSubmit} className="cursor-pointer hover:text-[#00C853] transition-colors">
-                  <HiSearch className="absolute left-0 top-1/2 -translate-y-1/2 text-white/40 hover:text-[#00C853]" size={40} />
+                <div onClick={handleSearchSubmit} className="cursor-pointer hover:text-[#81BC65] transition-colors">
+                  <HiSearch className="absolute left-0 top-1/2 -translate-y-1/2 text-white/40 hover:text-[#81BC65]" size={40} />
                 </div>
                 <input
                   autoFocus
@@ -198,8 +198,8 @@ const Navbar = () => {
                       onClick={() => handleSearchNavigation(result.href)}
                       className="block text-left w-full group"
                     >
-                      <div className="text-2xl md:text-3xl text-white group-hover:text-[#00C853] transition-all flex items-center">
-                        <span className="text-[#00C853]/50 mr-4 text-sm font-mono tracking-widest">{result.type.toUpperCase()}</span>
+                      <div className="text-2xl md:text-3xl text-white group-hover:text-[#81BC65] transition-all flex items-center">
+                        <span className="text-[#81BC65]/50 mr-4 text-sm font-mono tracking-widest">{result.type.toUpperCase()}</span>
                         {result.name}
                         <span className="ml-4 opacity-0 group-hover:opacity-100 transition-opacity text-base">↗</span>
                       </div>
@@ -212,7 +212,7 @@ const Navbar = () => {
                       <button
                         key={tag}
                         onClick={() => setSearchQuery(tag)}
-                        className="text-[#00C853] text-sm font-bold uppercase tracking-widest hover:text-white transition-colors"
+                        className="text-[#81BC65] text-sm font-bold uppercase tracking-widest hover:text-white transition-colors"
                       >
                         #{tag}
                       </button>
@@ -233,13 +233,13 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-[#021612] z-40 overflow-y-auto"
+            className="fixed inset-0 bg-[#020504] z-40 overflow-y-auto"
             style={{ paddingTop: '80px', paddingBottom: '80px' }}
           >
             {/* Close Button */}
             <button
               onClick={() => setIsOpen(false)}
-              className="fixed top-6 left-6 text-white hover:text-[#00C853] transition-colors z-50"
+              className="fixed top-6 left-6 text-white hover:text-[#81BC65] transition-colors z-50"
             >
               <HiX size={32} />
             </button>
@@ -258,7 +258,7 @@ const Navbar = () => {
                     <a
                       href="/"
                       onClick={() => setIsOpen(false)}
-                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#00C853] transition-colors block"
+                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#81BC65] transition-colors block"
                     >
                       Home
                     </a>
@@ -268,7 +268,7 @@ const Navbar = () => {
                     <a
                       href="#about"
                       onClick={() => setIsOpen(false)}
-                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#00C853] transition-colors block"
+                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#81BC65] transition-colors block"
                     >
                       Who we are
                     </a>
@@ -284,7 +284,7 @@ const Navbar = () => {
                           key={idx}
                           href={service.href}
                           onClick={() => setIsOpen(false)}
-                          className="text-white/70 text-lg hover:text-[#00C853] transition-colors block"
+                          className="text-white/70 text-lg hover:text-[#81BC65] transition-colors block"
                         >
                           - {service.name}
                         </a>
@@ -304,7 +304,7 @@ const Navbar = () => {
                     <a
                       href="#case-studies"
                       onClick={() => setIsOpen(false)}
-                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#00C853] transition-colors block"
+                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#81BC65] transition-colors block"
                     >
                       Our Work
                     </a>
@@ -314,7 +314,7 @@ const Navbar = () => {
                     <a
                       href="#insights"
                       onClick={() => setIsOpen(false)}
-                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#00C853] transition-colors block"
+                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#81BC65] transition-colors block"
                     >
                       Insights
                     </a>
@@ -324,7 +324,7 @@ const Navbar = () => {
                     <a
                       href="#careers"
                       onClick={() => setIsOpen(false)}
-                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#00C853] transition-colors block"
+                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#81BC65] transition-colors block"
                     >
                       Careers
                     </a>
@@ -334,7 +334,7 @@ const Navbar = () => {
                     <a
                       href="#contact"
                       onClick={() => setIsOpen(false)}
-                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#00C853] transition-colors block"
+                      className="text-white text-2xl md:text-3xl font-medium uppercase hover:text-[#81BC65] transition-colors block"
                     >
                       Get in touch
                     </a>
@@ -346,7 +346,7 @@ const Navbar = () => {
                       href="https://linkedin.com"
                       target="_blank"
                       rel="noreferrer"
-                      className="text-white hover:text-[#00C853] transition-colors"
+                      className="text-white hover:text-[#81BC65] transition-colors"
                     >
                       <svg
                         width="24"
@@ -361,7 +361,7 @@ const Navbar = () => {
                       href="https://instagram.com"
                       target="_blank"
                       rel="noreferrer"
-                      className="text-white hover:text-[#00C853] transition-colors"
+                      className="text-white hover:text-[#81BC65] transition-colors"
                     >
                       <svg
                         width="24"
@@ -376,7 +376,7 @@ const Navbar = () => {
                       href="https://facebook.com"
                       target="_blank"
                       rel="noreferrer"
-                      className="text-white hover:text-[#00C853] transition-colors"
+                      className="text-white hover:text-[#81BC65] transition-colors"
                     >
                       <svg
                         width="24"

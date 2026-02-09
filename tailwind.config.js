@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Manrope', 'sans-serif'],
+        sans: ['"Glacial Indifference"', 'Manrope', 'sans-serif'],
       },
       colors: {
         primary: {

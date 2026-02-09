@@ -172,7 +172,7 @@ const Services = () => {
 
     return (
         <section
-            className="relative pt-0 pb-12 bg-[#021612] overflow-hidden"
+            className="relative pt-0 pb-12 bg-[#020504] overflow-hidden"
             id="services"
         >
             {/* Animated Background Pattern - Madison Style */}
@@ -193,7 +193,7 @@ const Services = () => {
                         backgroundImage: `repeating-conic-gradient(
                             from 0deg,
                             transparent 0deg 10deg,
-                            rgba(0, 200, 83, 0.1) 10deg 20deg
+                            rgba(129, 188, 101, 0.1) 10deg 20deg
                         )`
                     }} />
                 </motion.div>
@@ -220,7 +220,7 @@ const Services = () => {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                 >
                     <motion.div
-                        className="w-12 h-[2px] bg-[#00C853] mb-4"
+                        className="w-12 h-[2px] bg-[#81BC65] mb-4"
                         initial={{ width: 0 }}
                         whileInView={{ width: 48 }}
                         viewport={{ once: true }}

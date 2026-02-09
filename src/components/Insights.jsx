@@ -81,7 +81,7 @@ const Insights = () => {
                 <div className="flex justify-between items-center mb-12">
                     {/* Counter */}
                     <div className="flex items-center gap-4">
-                        <span className="text-xl font-bold text-[#00C853]">{page + 1}</span>
+                        <span className="text-xl font-bold text-[#81BC65]">{page + 1}</span>
                         <span className="text-xl text-gray-300">/</span>
                         <span className="text-xl text-gray-400">{totalPages}</span>
                     </div>
@@ -90,19 +90,19 @@ const Insights = () => {
                     <div className="flex gap-2">
                         <button
                             onClick={prevSlide}
-                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#00C853] hover:text-white transition-all group"
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#81BC65] hover:text-white transition-all group"
                         >
                             <HiArrowLeft size={18} />
                         </button>
                         <button
                             onClick={nextSlide}
-                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#00C853] hover:text-white transition-all group"
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#81BC65] hover:text-white transition-all group"
                         >
                             <HiArrowRight size={18} />
                         </button>
                         <div className="ml-4 flex items-center gap-2">
-                            <span className="text-xs font-black tracking-widest text-[#00C853] uppercase">VIEW ALL</span>
-                            <div className="w-8 h-[1px] bg-[#00C853]/30" />
+                            <span className="text-xs font-black tracking-widest text-[#81BC65] uppercase">VIEW ALL</span>
+                            <div className="w-8 h-[1px] bg-[#81BC65]/30" />
                         </div>
                     </div>
                 </div>
@@ -133,11 +133,11 @@ const Insights = () => {
                                     href={item.link}
                                     className="flex items-center gap-3 group/link"
                                 >
-                                    <span className="text-[10px] font-black tracking-[0.2em] text-[#00C853] uppercase">
+                                    <span className="text-[10px] font-black tracking-[0.2em] text-[#81BC65] uppercase">
                                         {item.action}
                                     </span>
-                                    <div className="w-6 h-6 rounded-full border border-[#00C853]/20 flex items-center justify-center group-hover/link:bg-[#00C853] transition-all">
-                                        <HiArrowRight className="text-[#00C853] group-hover/link:text-white" size={12} />
+                                    <div className="w-6 h-6 rounded-full border border-[#81BC65]/20 flex items-center justify-center group-hover/link:bg-[#81BC65] transition-all">
+                                        <HiArrowRight className="text-[#81BC65] group-hover/link:text-white" size={12} />
                                     </div>
                                 </a>
                             </motion.div>
