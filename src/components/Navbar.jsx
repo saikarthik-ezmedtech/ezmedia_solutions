@@ -8,9 +8,6 @@ const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
-  const [pastHero, setPastHero] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   // Lock body scroll when search is open
   useEffect(() => {
@@ -26,37 +23,12 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const scrollDirection = currentScrollY < lastScrollY ? 'up' : 'down';
-      const vh = window.innerHeight;
-
-      setScrolled(currentScrollY > 50);
-
-      // Show center text when past hero content (> 90vh)
-      setPastHero(currentScrollY > vh * 0.9);
-
-      // --- VISIBILITY LOGIC (Refined) ---
-      // 1. In Hero (0 - 100vh): HIDE if scrolling down (immersive), SHOW if scrolling up or at top.
-      // 2. In Footer (Bottom): HIDE to let footer shine.
-      // 3. All other sections: ALWAYS SHOW (sticky).
-
-      const isInHero = currentScrollY < vh;
-      const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50; // Buffer
-
-      if (isAtBottom) {
-        setIsVisible(false);
-      } else if (isInHero && scrollDirection === 'down' && currentScrollY > 50) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Expanded Search Data
   const searchItems = [
@@ -97,48 +69,48 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 transform ${scrolled ? 'bg-[#020504]/80 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent py-8'
-          } ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
+        className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex items-center justify-between border border-white/[0.08] ${scrolled
+          ? 'top-4 w-[90%] md:w-[80%] max-w-5xl rounded-full py-3 px-6 bg-[#080F0C]/[0.6] backdrop-blur-[14px] shadow-2xl'
+          : 'top-6 w-[95%] max-w-7xl rounded-full py-4 px-8 bg-[#080F0C]/[0.6] backdrop-blur-[14px] shadow-lg'
+          }`}
       >
-        <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center relative">
+        <div className="w-full flex justify-between items-center relative">
           {/* Hamburger Menu - Left */}
           {/* Left: Hamburger & Logo */}
           <div className="flex items-center gap-4 md:gap-6 z-50">
-            <AnimatePresence>
-              {!pastHero && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Logo className="h-10 md:h-14 w-auto" showText={false} />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+              className="cursor-pointer"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <Logo className="h-12 md:h-16 w-auto" showText={false} />
+            </motion.div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-[#81BC65] transition-colors"
+              className="lg:hidden text-white hover:text-[#81BC65] transition-colors"
             >
               <HiMenuAlt4 size={28} />
             </button>
           </div>
 
-          {/* Center Text - EZMEDIA SOLUTIONS (Shows only when past hero) */}
-          <AnimatePresence>
+          {/* Center Text - EZMEDIA SOLUTIONS (Logo Swapping Removed) */}
+          {/* <AnimatePresence>
             {pastHero && (
-              <motion.div
-                initial={{ opacity: 0, x: '-50%', y: -10 }}
-                animate={{ opacity: 1, x: '-50%', y: 0 }}
-                exit={{ opacity: 0, x: '-50%', y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="absolute left-1/2 cursor-pointer"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              >
-                <Logo className="h-14 md:h-18 w-auto" showText={true} />
-              </motion.div>
+              ...
             )}
-          </AnimatePresence>
+          </AnimatePresence> */ }
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8 ml-auto mr-8">
+            <a href="#about" className="text-white hover:text-[#81BC65] transition-colors uppercase text-sm font-medium tracking-wide">Who we are</a>
+            <a href="#services" className="text-white hover:text-[#81BC65] transition-colors uppercase text-sm font-medium tracking-wide">What we do</a>
+            <a href="#work" className="text-white hover:text-[#81BC65] transition-colors uppercase text-sm font-medium tracking-wide">Our Work</a>
+            <a href="#insights" className="text-white hover:text-[#81BC65] transition-colors uppercase text-sm font-medium tracking-wide">Insights</a>
+            <a href="#contact" className="text-white hover:text-[#81BC65] transition-colors uppercase text-sm font-medium tracking-wide">Get in touch</a>
+          </div>
 
           {/* Search Icon - Right */}
           <button

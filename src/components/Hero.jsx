@@ -23,10 +23,10 @@ const Hero = () => {
   const xSpring = useSpring(mouseX, { stiffness: 100, damping: 20 });
   const ySpring = useSpring(mouseY, { stiffness: 100, damping: 20 });
 
-  const textX = useTransform(xSpring, [-0.5, 0.5], [-50, 50]);
-  const textY = useTransform(ySpring, [-0.5, 0.5], [-50, 50]);
   const bgX = useTransform(xSpring, [-0.5, 0.5], [40, -40]);
   const bgY = useTransform(ySpring, [-0.5, 0.5], [40, -40]);
+
+  const textParallaxY = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
@@ -47,10 +47,10 @@ const Hero = () => {
           {/* Base Aurora - Bottom Layer (Vibrant) */}
           <div className="absolute inset-0">
             <Aurora
-              colorStops={["#0a0f4d", "#00C853", "#81bc65"]}
-              blend={0.4}
-              amplitude={1.8}
-              speed={1.5}
+              colorStops={["#252B6E", "#3BB3A3", "#81BC65"]}
+              blend={0.6}
+              amplitude={0.4}
+              speed={0.35}
             />
           </div>
 
@@ -76,7 +76,7 @@ const Hero = () => {
 
         {/* 2. HERO CONTENT - Focused & Elegant */}
         <motion.div
-          style={{ x: textX, y: textY, scale, opacity }}
+          style={{ y: textParallaxY, scale, opacity }}
           className="relative z-10 text-center px-6 w-full max-w-7xl mx-auto"
         >
           <div className="flex flex-col items-center select-none text-white">
@@ -98,8 +98,9 @@ const Hero = () => {
               style={{
                 fontSize: 'clamp(3rem, 12vw, 8rem)',
                 color: 'transparent',
-                WebkitTextStroke: '1.5px #81BC65',
-                textShadow: '0 0 30px rgba(129,188,101,0.3)',
+                WebkitTextStroke: '2px #81BC65',
+                textShadow: '0 0 3px rgba(129,188,101,0.12)',
+                opacity: 0.82,
                 fontFamily: '"Glacial Indifference", sans-serif'
               }}
               initial={{ opacity: 0, scale: 0.95 }}

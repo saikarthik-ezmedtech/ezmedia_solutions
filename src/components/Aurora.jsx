@@ -105,7 +105,7 @@ void main() {
   
   vec3 auroraColor = intensity * rampColor;
   
-  fragColor = vec4(auroraColor * auroraAlpha, auroraAlpha * 1.5);
+  fragColor = vec4(auroraColor * auroraAlpha, auroraAlpha * 0.5);
 }
 `;
 
