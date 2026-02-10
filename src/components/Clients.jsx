@@ -1,5 +1,6 @@
 import React from 'react';
 import Marquee from 'react-fast-marquee';
+import { motion } from 'framer-motion';
 
 const Clients = () => {
     const row1Logos = [
@@ -33,43 +34,51 @@ const Clients = () => {
     ];
 
     return (
-        <section className="py-12 md:py-16 bg-white relative overflow-hidden">
-            {/* Background Pattern Hint */}
-            <div className="absolute right-0 top-0 w-1/3 h-full opacity-5 pointer-events-none select-none">
-                <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path d="M100 0 L100 100 L0 100 Z" fill="currentColor" />
-                </svg>
+        <section className="py-12 sm:py-20 bg-white relative overflow-hidden" id="clients">
+            <div className="container mx-auto px-4 sm:px-6 text-center mb-10 sm:mb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="max-w-2xl mx-auto"
+                >
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-4 sm:mb-6">
+                        Trusted by industry <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">leaders</span>
+                    </h2>
+                </motion.div>
             </div>
 
-            <div className="w-full px-6 md:px-12 lg:px-24 mb-16">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-gray-900 leading-tight md:w-1/2">
-                    Trusted by <span className="text-[#00C853]">Industry Leaders</span>
-                </h2>
-            </div>
+            <div className="relative w-full">
+                <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
 
-            <div className="space-y-12">
-                {/* Row 1: Left to Right */}
-                <Marquee gradient={true} gradientColor="white" gradientWidth={100} speed={50}>
-                    {row1Logos.map((logo, index) => (
-                        <div key={index} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer">
-                            <img src={logo} alt="Client Logo" className="h-12 md:h-16 w-auto object-contain opacity-70 hover:opacity-100" />
-                        </div>
-                    ))}
-                </Marquee>
+                <div className="space-y-16">
+                    {/* Row 1 */}
+                    <Marquee gradient={false} speed={40} className="py-4">
+                        {row1Logos.map((logo, index) => (
+                            <div key={index} className="mx-12 group transition-all duration-300">
+                                <img
+                                    src={logo}
+                                    alt="Client Logo"
+                                    className="h-12 md:h-16 w-auto object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 filter"
+                                />
+                            </div>
+                        ))}
+                    </Marquee>
 
-                {/* Row 2: Right to Left */}
-                <Marquee gradient={true} gradientColor="white" gradientWidth={100} speed={40} direction="right">
-                    {row2Logos.map((logo, index) => (
-                        <div key={index} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer">
-                            <img src={logo} alt="Client Logo" className="h-12 md:h-16 w-auto object-contain opacity-70 hover:opacity-100" />
-                        </div>
-                    ))}
-                </Marquee>
-            </div>
-
-            {/* Madison-style bottom spacing */}
-            <div className="mt-20 flex justify-center">
-                <div className="w-12 h-1 bg-madison-red"></div>
+                    {/* Row 2 */}
+                    <Marquee gradient={false} speed={30} direction="right" className="py-4">
+                        {row2Logos.map((logo, index) => (
+                            <div key={index} className="mx-12 group transition-all duration-300">
+                                <img
+                                    src={logo}
+                                    alt="Client Logo"
+                                    className="h-12 md:h-16 w-auto object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 filter"
+                                />
+                            </div>
+                        ))}
+                    </Marquee>
+                </div>
             </div>
         </section>
     );

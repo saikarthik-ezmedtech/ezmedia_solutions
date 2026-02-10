@@ -8,74 +8,95 @@ const FAQ = () => {
     const faqs = [
         {
             question: "How long does it take to see results?",
-            answer: "Measurable improvements typically appear in 60-90 days. SEO efforts generally mature in 3-6 months, while our paid ad strategies often generate qualified leads within the first few weeks."
+            answer: "Measurable improvements typically appear in 60-90 days. SEO efforts mature in 3-6 months, while our strategies generate leads within weeks."
         },
         {
-            question: "Do you work with all types of medical practices?",
-            answer: "Yes! We specialize in dental, general practice, wellness centers, and cosmetic surgery. Our AI models are adaptable to various healthcare niches to ensure compliance and relevance."
+            question: "Do you work with all medical practices?",
+            answer: "Yes! We specialize in dental, wellness centers, and cosmetic surgery. Our AI models ensure healthcare compliance and relevance."
         },
         {
             question: "What makes your AI automation different?",
-            answer: "Our systems are trained strictly on healthcare datasets, ensuring HIPAA compliance and accurate medical terminology. Unlike generic bots, our AI provides 24/7 empathetic, human-like support."
+            answer: "Our systems are trained strictly on healthcare datasets, ensuring HIPAA compliance and accurate medical terminology."
         },
         {
             question: "What is your pricing model?",
-            answer: "We offer transparent, tiered packages based on practice size and goals. Whether you're a single clinic or a multi-location network, we have a solution that scales with your growth."
+            answer: "We offer transparent, tiered packages based on practice size and goals. We have a solution that scales with your growth."
         }
     ];
 
     return (
-        <section className="py-24 bg-[#021612] relative overflow-hidden" id="faq">
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
-                <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+        <section className="py-12 sm:py-16 md:py-24 relative overflow-hidden" id="faq">
+            {/* Background SVG */}
+            <div
+                className="absolute inset-0 z-0 opacity-40 pointer-events-none"
+                style={{
+                    backgroundImage: 'url(/assets/qa bg.svg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            />
 
-                    {/* Left Column: Heading & Context */}
-                    <div className="lg:w-1/3 pt-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+                <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-20">
+
+                    {/* Left Column: Image Stack */}
+                    <div className="lg:w-1/2 relative hidden lg:block">
                         <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
+                            className="relative"
                         >
-                            <span className="text-[#00C853] font-mono text-sm font-bold uppercase tracking-widest mb-4 block">
-                                / Q&A
-                            </span>
-                            <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-8">
-                                Common<br />
-                                <span className="text-transparent" style={{ WebkitTextStroke: '1px #00C853' }}>Queries</span>
-                            </h2>
-                            <p className="text-white/60 text-lg leading-relaxed mb-8 max-w-md">
-                                Everything you need to know about our process, technology, and how we drive growth for your practice.
-                            </p>
-                            <a href="#contact" className="inline-flex items-center gap-2 text-white font-bold uppercase tracking-widest text-xs hover:text-[#00C853] transition-colors group">
-                                Ask a specific question
-                                <span className="w-8 h-[1px] bg-[#00C853] group-hover:w-12 transition-all"></span>
-                            </a>
+                            {/* Main Image Container - Crisp rendering */}
+                            <div className="relative rounded-[32px] overflow-hidden shadow-2xl bg-white border border-gray-100">
+                                <img
+                                    src="/assets/qa img.png"
+                                    alt="QA Presentation"
+                                    className="w-full h-auto block"
+                                    style={{ imageRendering: 'auto' }}
+                                />
+                            </div>
                         </motion.div>
                     </div>
 
-                    {/* Right Column: Accordion List */}
-                    <div className="lg:w-2/3">
-                        <div className="space-y-4">
+                    {/* Right Column: Content & Accordion */}
+                    <div className="lg:w-1/2 w-full">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="mb-6 sm:mb-10"
+                        >
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-3 sm:mb-4">
+                                Outstanding Digital Experience
+                            </h2>
+                            <p className="text-gray-500 text-base sm:text-lg max-w-xl">
+                                Strategic insights to answer your most critical questions.
+                            </p>
+                        </motion.div>
+
+                        <div className="space-y-3">
                             {faqs.map((faq, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="border-b border-white/10 last:border-0"
+                                    transition={{ duration: 0.5 }}
+                                    className={`rounded-[24px] transition-all duration-300 border ${activeIndex === index ? 'bg-white shadow-xl shadow-gray-200/50 border-gray-100' : 'hover:bg-gray-50 border-transparent'}`}
                                 >
                                     <button
                                         onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                                        className="w-full py-8 flex items-start justify-between text-left group transition-all"
+                                        className="w-full px-8 py-5 flex items-center justify-between text-left group"
                                     >
-                                        <span className={`text-xl md:text-3xl font-bold uppercase tracking-tight transition-colors duration-300 pr-8 ${activeIndex === index ? 'text-[#00C853]' : 'text-white group-hover:text-[#00C853]/70'}`}>
+                                        <span className={`text-lg md:text-xl font-bold transition-colors ${activeIndex === index ? 'text-gray-900' : 'text-gray-500'}`}>
                                             {faq.question}
                                         </span>
-                                        <span className={`flex-shrink-0 ml-4 p-2 rounded-full border transition-all duration-300 ${activeIndex === index ? 'border-[#00C853] text-[#00C853] rotate-180' : 'border-white/20 text-white/50 group-hover:border-[#00C853] group-hover:text-[#00C853]'}`}>
+                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center transition-all ${activeIndex === index ? 'bg-gray-900 text-white' : 'border-gray-200 text-gray-400'}`}>
                                             {activeIndex === index ? <HiMinus size={16} /> : <HiPlus size={16} />}
-                                        </span>
+                                        </div>
                                     </button>
 
                                     <AnimatePresence>
@@ -84,10 +105,10 @@ const FAQ = () => {
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: "auto", opacity: 1 }}
                                                 exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                transition={{ duration: 0.3 }}
                                                 className="overflow-hidden"
                                             >
-                                                <p className="text-white/50 text-lg leading-loose pb-8 max-w-3xl">
+                                                <p className="px-8 pb-6 text-gray-500 text-base md:text-lg leading-relaxed">
                                                     {faq.answer}
                                                 </p>
                                             </motion.div>

@@ -1,129 +1,131 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FaTwitter, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
-import { HiArrowNarrowRight } from 'react-icons/hi';
-import Logo from './Logo';
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaInstagram,
+  FaFacebook,
+  FaEnvelope,
+} from 'react-icons/fa';
 
 const Footer = () => {
+  const smoothScrollTo = (e, targetId) => {
+    e.preventDefault();
+    const target = document.querySelector(targetId);
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    } else if (targetId === '#home') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <footer className="relative bg-[#020504] text-white min-h-screen flex flex-col justify-between overflow-hidden py-12 lg:py-0" id="contact">
-      <div id="careers" className="absolute top-0" />
-      {/* Subtle Gradient Backdrops */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-[#81BC65] rounded-full blur-[180px]" />
-        <div className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-[#ED1C24] rounded-full blur-[180px]" />
-      </div>
-
-      {/* Top Bar: Brand Name */}
-      <div className="container mx-auto px-6 lg:px-12 py-10 relative z-10 flex justify-between items-start">
-        <div className="group cursor-pointer inline-flex transform hover:scale-105 transition-transform duration-300">
-          <Logo className="h-14 w-auto" showText={true} />
-        </div>
-
-        {/* Optional "Start a Project" Button to the Right */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          className="bg-[#81BC65] text-black px-8 py-3 font-black text-sm uppercase tracking-widest hover:bg-white transition-all hidden md:flex items-center gap-3"
-        >
-          Start Project
-          <HiArrowNarrowRight />
-        </motion.button>
-      </div>
-
-      {/* Main Content Body */}
-      <div className="container mx-auto px-6 lg:px-12 relative z-10 flex-1 flex items-center">
-        <div className="grid lg:grid-cols-[1.2fr_1fr_1fr] gap-12 lg:gap-24 w-full">
-
-          {/* Column 1: Huge CTA Title */}
-          <div className="flex flex-col justify-center">
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.85] tracking-tighter mb-8">
-              LET'S BUILD<br />
-              SOMETHING<br />
-              <span className="text-[#81BC65] drop-shadow-[0_0_40px_rgba(0,200,83,0.3)]">GREAT.</span>
-            </h2>
-          </div>
-
-          {/* Column 2: Navigation (Madison Style) */}
-          <div className="flex flex-col justify-center space-y-2">
-            {['WHO WE ARE', 'WHAT WE DO'].map((item) => (
-              <div key={item} className="group cursor-pointer border-b border-white/10 py-6 flex items-center justify-between">
-                <h3 className="text-2xl md:text-2xl font-black uppercase group-hover:text-[#81BC65] transition-colors">
-                  {item}
-                </h3>
-                <span className="text-2xl font-light opacity-30 group-hover:opacity-100 group-hover:text-[#81BC65] transition-all">+</span>
-              </div>
-            ))}
-            {/* Sub-services list (inline or below) */}
-            <div className="py-4 space-y-4 opacity-50 pl-2">
-              {['Creative Wing', 'Performance Marketing', 'Research'].map((s) => (
-                <p key={s} className="text-xs font-bold uppercase tracking-widest hover:text-[#81BC65] cursor-pointer transition-colors block">
-                  - {s}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          {/* Column 3: Secondary Links & Socials */}
-          <div className="flex flex-col justify-center space-y-6">
-            <div className="grid grid-cols-1 gap-6">
-              {['OUR WORK', 'NEWS', 'CAREERS', 'GET IN TOUCH'].map((link) => (
-                <h3 key={link} className="text-2xl md:text-2xl font-black uppercase hover:text-[#81BC65] cursor-pointer transition-colors leading-none">
-                  {link}
-                </h3>
-              ))}
-            </div>
-
-            {/* Social Icons & Newsletter */}
-            <div className="pt-8 space-y-8">
-              <div className="flex gap-6">
-                {[FaTwitter, FaLinkedin, FaInstagram, FaFacebook].map((Icon, i) => (
-                  <motion.a
-                    key={i}
-                    whileHover={{ scale: 1.2, color: '#81BC65' }}
-                    className="text-white hover:text-[#81BC65] transition-colors"
-                  >
-                    <Icon size={24} />
-                  </motion.a>
-                ))}
-              </div>
-              <div className="max-w-xs relative">
-                <input
-                  type="email"
-                  placeholder="NEWSLETTER"
-                  className="w-full bg-transparent border-b border-white/20 py-2 text-xs font-bold tracking-widest focus:outline-none focus:border-[#81BC65] transition-colors"
-                />
-                <button className="absolute right-0 top-1/2 -translate-y-1/2 text-white/40 hover:text-[#81BC65]">
-                  <HiArrowNarrowRight size={20} />
-                </button>
-              </div>
-            </div>
-          </div>
+    <footer className="bg-[#0B0F0E] text-white">
+      {/* Top Contact Strip */}
+      <div className="border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-4 flex flex-col lg:flex-row justify-between items-center gap-4 text-sm text-white">
+          <a
+            href="#home"
+            onClick={(e) => smoothScrollTo(e, '#home')}
+            className="flex items-center cursor-pointer"
+          >
+            <img
+              src="/assets/ezmedia_logo_v2 1.svg"
+              alt="EZ Media Solutions Logo"
+              className="h-14 w-14 sm:h-20 sm:w-20 object-contain"
+            />
+            <span className="text-lg sm:text-xl font-extrabold text-white ml-1" style={{ fontFamily: "'Montserrat', Arial, sans-serif", letterSpacing: '-0.02em' }}>
+              EZMEDIA SOLUTIONS
+            </span>
+          </a>
+          <p className="flex items-center gap-2 text-xs sm:text-sm"><FaEnvelope className="text-white" /> info@ezmediasolutions.com</p>
+          <p className="text-xs sm:text-sm text-center">📍 3423 Piedmont Rd NE, Atlanta, GA 30305, United States</p>
         </div>
       </div>
 
-      {/* Bottom Bar: Madison Style Fine Print */}
-      <div className="container mx-auto px-6 lg:px-12 py-10 relative z-10 border-t border-white/5">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[9px] font-black tracking-[0.3em] uppercase opacity-30">
-            © 2026 EZMEDIA SOLUTIONS. ALL RIGHTS RESERVED.
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-12 sm:py-20 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-14">
+
+        {/* Column 1: Brand */}
+        <div className="space-y-6">
+          <p className="text-sm text-white leading-relaxed max-w-sm">
+            EZ Media Solutions helps brands grow through strategic digital
+            marketing, performance campaigns, and data-driven insights.
           </p>
-          <div className="flex gap-10">
-            {['Privacy Policy', 'Terms & Conditions'].map((item) => (
-              <a key={item} href="#" className="text-[9px] font-black tracking-[0.3em] uppercase opacity-30 hover:opacity-100 hover:text-white transition-all">
-                {item}
-              </a>
-            ))}
+
+          <div className="flex gap-4 pt-2">
+            {[FaTwitter, FaLinkedin, FaInstagram, FaFacebook].map(
+              (Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="text-white hover:text-[#81BC65] transition-colors"
+                >
+                  <Icon size={16} />
+                </a>
+              )
+            )}
           </div>
-          {/* Madison-style membership seal simulation */}
-          <div className="hidden md:flex items-center gap-4 opacity-30">
-            <div className="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center">
-              <span className="text-[8px] font-bold">EMZ</span>
-            </div>
-            <span className="text-[8px] font-bold uppercase tracking-widest">Growth First</span>
+        </div>
+
+        {/* Column 2: Services */}
+        <div>
+          <h4 className="text-sm font-bold uppercase tracking-widest mb-4">
+            Services
+          </h4>
+          <ul className="space-y-3 text-sm text-white">
+            <li className="hover:text-[#81BC65] cursor-pointer">Creative Wing</li>
+            <li className="hover:text-[#81BC65] cursor-pointer">Performance Marketing</li>
+            <li className="hover:text-[#81BC65] cursor-pointer">Research & Engagement</li>
+          </ul>
+        </div>
+
+        {/* Column 3: Navigate */}
+        <div>
+          <h4 className="text-sm font-bold uppercase tracking-widest mb-4">
+            Navigate
+          </h4>
+          <ul className="space-y-3 text-sm text-white">
+            <li><a href="#services" onClick={(e) => smoothScrollTo(e, '#services')} className="hover:text-[#81BC65] cursor-pointer">Services</a></li>
+            <li><a href="#clients" onClick={(e) => smoothScrollTo(e, '#clients')} className="hover:text-[#81BC65] cursor-pointer">Clients</a></li>
+            <li><a href="#testimonials" onClick={(e) => smoothScrollTo(e, '#testimonials')} className="hover:text-[#81BC65] cursor-pointer">Testimonials</a></li>
+            <li><a href="#contact" onClick={(e) => smoothScrollTo(e, '#contact')} className="hover:text-[#81BC65] cursor-pointer">Contact</a></li>
+          </ul>
+        </div>
+
+        {/* Column 4: Quick Links */}
+        <div>
+          <h4 className="text-sm font-bold uppercase tracking-widest mb-4">
+            Quick Links
+          </h4>
+          <ul className="space-y-3 text-sm text-white">
+            <li><a href="#home" onClick={(e) => smoothScrollTo(e, '#home')} className="hover:text-[#81BC65] cursor-pointer">Home</a></li>
+            <li><a href="#blogs" onClick={(e) => smoothScrollTo(e, '#blogs')} className="hover:text-[#81BC65] cursor-pointer">Blogs</a></li>
+            <li><a href="#faq" onClick={(e) => smoothScrollTo(e, '#faq')} className="hover:text-[#81BC65] cursor-pointer">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-6 sm:py-8 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-[10px] sm:text-[11px] text-white">
+          <p>© 2026 EZ Media Solutions. All rights reserved.</p>
+          <div className="flex gap-6">
+            <span className="hover:text-[#81BC65] cursor-pointer">
+              Privacy Policy
+            </span>
+            <span className="hover:text-[#81BC65] cursor-pointer">
+              Terms & Conditions
+            </span>
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   );
 };
 
