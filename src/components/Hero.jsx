@@ -191,6 +191,12 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gray-900 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors shadow-lg"
+              onClick={() => {
+                const target = document.querySelector('#contact');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
             >
               Contact
             </motion.button>
