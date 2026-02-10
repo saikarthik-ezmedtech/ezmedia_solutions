@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const services = [
     {
@@ -64,76 +64,65 @@ const ServiceItem = ({ service, isActive, onHover, index }) => {
                 <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 relative z-10 py-8 sm:py-10 md:py-12 min-h-[120px] sm:min-h-[150px] flex flex-col justify-center">
 
                     {/* Collapsed View (Title Only) */}
-                    <AnimatePresence>
-                        {!isActive && (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0, position: 'absolute', top: '2.5rem' }}
-                                transition={{ duration: 0.3 }}
-                                className="flex items-center justify-between"
-                            >
-                                <h3 className="text-xl sm:text-2xl md:text-3xl font-medium uppercase tracking-wider text-white">
-                                    {service.title}
-                                </h3>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {!isActive && (
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-medium uppercase tracking-wider text-white">
+                                {service.title}
+                            </h3>
+                        </div>
+                    )}
 
                     {/* Expanded Content View */}
-                    <AnimatePresence>
-                        {isActive && (
-                            <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                                className="relative w-full"
-                            >
-                                <div className="flex flex-col md:flex-row items-start justify-between gap-6 sm:gap-8 md:gap-16">
-                                    {/* Large Title */}
-                                    <motion.h3
-                                        initial={{ x: -20, opacity: 0 }}
-                                        animate={{ x: 0, opacity: 1 }}
-                                        transition={{ duration: 0.4, delay: 0.1 }}
-                                        className="text-2xl sm:text-4xl md:text-6xl font-medium uppercase tracking-tight text-[#021612] flex-shrink-0 md:w-1/3"
-                                    >
-                                        {service.title}
-                                    </motion.h3>
+                    {isActive && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="relative w-full"
+                        >
+                            <div className="flex flex-col md:flex-row items-start justify-between gap-6 sm:gap-8 md:gap-16">
+                                {/* Large Title */}
+                                <motion.h3
+                                    initial={{ x: -20, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    transition={{ duration: 0.4, delay: 0.1 }}
+                                    className="text-2xl sm:text-4xl md:text-6xl font-medium uppercase tracking-tight text-[#021612] flex-shrink-0 md:w-1/3"
+                                >
+                                    {service.title}
+                                </motion.h3>
 
-                                    {/* Description and CTA */}
-                                    <motion.div
-                                        initial={{ x: 20, opacity: 0 }}
-                                        animate={{ x: 0, opacity: 1 }}
-                                        transition={{ duration: 0.4, delay: 0.15 }}
-                                        className="flex-1 flex flex-col items-start gap-8"
-                                    >
-                                        <p className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed font-light font-primary max-w-2xl">
-                                            {service.description}
-                                        </p>
+                                {/* Description and CTA */}
+                                <motion.div
+                                    initial={{ x: 20, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    transition={{ duration: 0.4, delay: 0.15 }}
+                                    className="flex-1 flex flex-col items-start gap-8"
+                                >
+                                    <p className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed font-light font-primary max-w-2xl">
+                                        {service.description}
+                                    </p>
 
-                                        {/* Arrow Button */}
-                                        <div className="relative w-16 h-16 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-[#021612] transition-colors">
-                                            <svg
-                                                width="32"
-                                                height="32"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                className="text-[#E30613] -rotate-45"
-                                            >
-                                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                <polyline points="12 5 19 12 12 19"></polyline>
-                                            </svg>
-                                        </div>
-                                    </motion.div>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                                    {/* Arrow Button */}
+                                    <div className="relative w-16 h-16 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-[#021612] transition-colors">
+                                        <svg
+                                            width="32"
+                                            height="32"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="text-[#E30613] -rotate-45"
+                                        >
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                            <polyline points="12 5 19 12 12 19"></polyline>
+                                        </svg>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    )}
                 </div>
             </motion.div>
         </div>

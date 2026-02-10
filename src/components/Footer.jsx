@@ -44,7 +44,7 @@ const Footer = () => {
             </span>
           </a>
           <p className="flex items-center gap-2 text-xs sm:text-sm"><FaEnvelope className="text-white" /> info@ezmediasolutions.com</p>
-          <p className="text-xs sm:text-sm text-center">📍 3423 Piedmont Rd NE, Atlanta, GA 30305, United States</p>
+          <p className="text-xs sm:text-sm text-center">📍 3423 Piedmont Rd NE,<br />Atlanta, GA 30305, United States</p>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ const Footer = () => {
                 <a
                   key={i}
                   href="#"
-                  className="text-white hover:text-[#81BC65] transition-colors"
+                  className="text-white hover:text-[#81BC65] transition-colors duration-75"
                 >
                   <Icon size={16} />
                 </a>

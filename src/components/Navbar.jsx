@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { HiMenuAlt4, HiX, HiChevronUp, HiChevronDown } from 'react-icons/hi';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { HiMenuAlt4, HiX } from 'react-icons/hi';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -161,33 +161,51 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className={`lg:hidden border-t border-gray-200 transition-colors duration-500 ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-900'}`}
-          >
-            <div className="px-6 py-4 space-y-4">
-              {menuItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="block font-medium py-2 transition-colors hover:opacity-70"
-                  onClick={(e) => {
-                    smoothScrollTo(e, item.href);
-                    setIsOpen(false);
-                  }}
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div
+          className={`lg:hidden border-t border-gray-200 ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-900'}`}
+        >
+          <div className="px-6 py-4 space-y-2">
+            {menuItems.map((item) => (
+              <button
+                key={item.name}
+                type="button"
+                className="block w-full text-left font-medium py-3 px-2 transition-colors hover:opacity-70"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsOpen(false);
+                  setTimeout(() => {
+                    const target = document.querySelector(item.href);
+                    if (target) {
+                      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }}
+              >
+                {item.name}
+              </button>
+            ))}
+            <button
+              type="button"
+              className={`w-full mt-4 px-6 py-3 rounded-full font-semibold text-sm ${themeClasses[theme].button}`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsOpen(false);
+                setTimeout(() => {
+                  const target = document.querySelector('#contact');
+                  if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }, 100);
+              }}
+            >
+              Contact us
+            </button>
+          </div>
+        </div>
+      )}
     </motion.nav>
   );
 };
