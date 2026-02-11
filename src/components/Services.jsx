@@ -56,7 +56,7 @@ const ServiceItem = ({ service, isActive, onHover, index }) => {
 
             <motion.div
                 animate={{
-                    backgroundColor: isActive ? "#ffffff" : "transparent",
+                    backgroundColor: isActive ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)",
                 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
                 className="relative overflow-hidden transition-all duration-300"

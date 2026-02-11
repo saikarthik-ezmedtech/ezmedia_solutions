@@ -140,8 +140,17 @@ const FloatingIcon = ({ icon, index, total, isMobile }) => {
 
 // Infinite Loop Container
 const IconLoop = () => {
-  // Mobile detection
-  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+  const [isMobile, setIsMobile] = React.useState(
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const allIcons = Object.values(SocialIcons);
   // Only show 4 icons on mobile for better performance
@@ -151,7 +160,7 @@ const IconLoop = () => {
     <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
       {visibleIcons.map((icon, i) => (
         <FloatingIcon
-          key={i}
+          key={`${isMobile ? 'm' : 'd'}-${i}`} // Force re-mount on switch for smooth transition
           icon={icon}
           index={i}
           total={visibleIcons.length}
@@ -171,7 +180,7 @@ const Hero = () => {
   const yGraphic = useTransform(scrollY, [0, 1000], [0, 200]); // Distinct layer movement
 
   return (
-    <section className="relative w-full min-h-screen bg-transparent overflow-hidden flex items-center justify-center">
+    <section className="relative w-full min-h-[500px] md:min-h-[700px] lg:min-h-screen bg-transparent overflow-hidden flex items-center justify-center">
 
       {/* Infinite Loop Icons Background with Parallax */}
       <motion.div style={{ y: yBackground }} className="absolute inset-0 z-0">
@@ -179,8 +188,8 @@ const Hero = () => {
       </motion.div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 sm:py-12 lg:py-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Left Side - Text Content */}
           <motion.div
@@ -188,11 +197,11 @@ const Hero = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6 relative"
+            className="space-y-3 sm:space-y-6 relative"
           >
             {/* Main Headline */}
             <div className="relative">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight">
                 Digital
                 <br />
                 marketing

@@ -50,9 +50,9 @@ const FAQ = () => {
                             className="relative"
                         >
                             {/* Main Image Container - Crisp rendering */}
-                            <div className="relative rounded-[32px] overflow-hidden shadow-2xl bg-white border border-gray-100">
+                            <div className="relative">
                                 <img
-                                    src="/assets/qa img.png"
+                                    src="/assets/qa%20img.svg"
                                     alt="QA Presentation"
                                     className="w-full h-auto block"
                                     style={{ imageRendering: 'auto' }}

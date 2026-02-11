@@ -5,56 +5,57 @@ import { FiSearch, FiArrowRight, FiChevronDown } from 'react-icons/fi';
 const blogData = [
     {
         id: 1,
-        category: "Social Media",
-        title: "How to Create a Social Media Branding Strategy From Scratch",
-        image: "https://vervemedia.co.in/manage/upload/How to Create a Social Media Branding Strategy From Scratch.jpg",
+        category: "Digital Marketing",
+        title: "How AI is Transforming Patient Acquisition in Healthcare Marketing",
+        image: "/assets/blog/ai-healthcare-marketing.jpg",
         date: "Feb 10, 2026",
         link: "#"
     },
     {
         id: 2,
         category: "SEO",
-        title: "SEO for Brand Awareness: A Comprehensive Guide",
-        image: "https://vervemedia.co.in/manage/upload/boost brand awareness.jpg",
+        title: "Local SEO Strategies to Attract More Patients to Your Practice",
+        image: "/assets/blog/local-seo-healthcare.jpg",
         date: "Feb 08, 2026",
         link: "#"
     },
     {
         id: 3,
         category: "Digital Marketing",
-        title: "How to Choose a Digital Marketing Agency Ideal for Small Businesses",
-        image: "https://vervemedia.co.in/manage/upload/How to Choose a Digital Marketing Agency Ideal for Small Businesses.jpg",
+        title: "Building Patient Trust Through Authentic Healthcare Marketing",
+        image: "/assets/blog/patient-trust-marketing.jpg",
         date: "Feb 05, 2026",
         link: "#"
     },
     {
         id: 4,
-        category: "SEO",
-        title: "SEO Trends 2026: How AI, LLMs & GEO Strategies Will Redefine Search Rankings",
-        image: "https://vervemedia.co.in/manage/upload/SEO Trends 2026 AI SEO, LLM SEO & GEO Strategies.jpg",
+        category: "Social Media",
+        title: "Video Marketing for Healthcare: Engaging Patients in the Digital Age",
+        image: "/assets/blog/video-marketing-healthcare.jpg",
         date: "Feb 02, 2026",
         link: "#"
     },
     {
         id: 5,
-        category: "SEO",
-        title: "10 Advanced SEO Strategies for Organic Success",
-        image: "https://vervemedia.co.in/manage/upload/Advanced SEO Strategies for Organic Success.jpg",
+        category: "Digital Marketing",
+        title: "Telehealth Marketing: Strategies to Promote Virtual Care Services",
+        image: "/assets/blog/telehealth-marketing.jpg",
         date: "Jan 30, 2026",
         link: "#"
     },
     {
         id: 6,
-        category: "Website",
-        title: "Shopify vs. WordPress: Which Is Better for Ecommerce?",
-        image: "https://vervemedia.co.in/manage/upload/Shopify vs WordPress.jpg",
+        category: "SEO",
+        title: "HIPAA-Compliant Digital Marketing: Protecting Patient Data While Growing Your Practice",
+        image: "/assets/blog/hipaa-compliant-marketing.jpg",
         date: "Jan 28, 2026",
         link: "#"
     }
 ];
 
-const BlogCard = ({ blog }) => (
+const BlogCard = React.forwardRef(({ blog }, ref) => (
     <motion.div
+        ref={ref}
         layout
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +63,7 @@ const BlogCard = ({ blog }) => (
         whileHover={{ y: -10 }}
         className="group bg-white rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 h-full flex flex-col"
     >
-        <div className="relative h-48 sm:h-64 overflow-hidden">
+        <div className="relative h-48 sm:h-64 overflow-hidden bg-gray-100">
             <img
                 src={blog.image}
                 alt={blog.title}
@@ -89,7 +90,9 @@ const BlogCard = ({ blog }) => (
             </div>
         </div>
     </motion.div>
-);
+));
+
+BlogCard.displayName = "BlogCard";
 
 const Blogs = () => {
     const [activeCategory, setActiveCategory] = useState("All");
@@ -97,7 +100,7 @@ const Blogs = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
 
-    const categories = ["All", "Social Media", "SEO", "Digital Marketing", "Website"];
+    const categories = ["All", "Digital Marketing", "SEO", "Social Media"];
 
     const filteredBlogs = blogData.filter(blog => {
         const matchesCategory = activeCategory === "All" || blog.category === activeCategory;

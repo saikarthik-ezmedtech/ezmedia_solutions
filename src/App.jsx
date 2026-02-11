@@ -17,17 +17,19 @@ import Lenis from 'lenis';
 
 function App() {
   useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
     const lenis = new Lenis({
-      duration: 1.0,
+      duration: isTouchDevice ? 0.8 : 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.8,
-      smoothTouch: false,
-      touchMultiplier: 2,
+      wheelMultiplier: 1.0,
+      smoothTouch: true,
+      touchMultiplier: 1.8,
       infinite: false,
-      lerp: 0.1,
+      lerp: isTouchDevice ? 0.12 : 0.1,
     });
 
     function raf(time) {
@@ -48,7 +50,7 @@ function App() {
       <Navbar />
 
       {/* Shared Hero Background Container */}
-      <div id="home" className="relative">
+      <div id="home" className="relative pt-20">
         <div
           className="absolute inset-0 z-0 pointer-events-none"
           style={{
