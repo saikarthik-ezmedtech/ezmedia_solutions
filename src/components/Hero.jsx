@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useMotionValue, useTransform, useAnimationFrame, useScroll, useReducedMotion } from 'framer-motion';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 // Original brand color social media icons
 const SocialIcons = {
@@ -63,17 +64,6 @@ const SocialIcons = {
       <path d="M8 12L10 14L15 9" stroke="#0F9D58" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
-  webDesign: (
-    <svg viewBox="0 0 24 24" fill="none">
-      <rect x="2" y="4" width="20" height="16" rx="2" fill="#7E22CE" />
-      <path d="M2 9H22" stroke="white" strokeWidth="1.5" />
-      <circle cx="5" cy="6.5" r="1" fill="white" />
-      <circle cx="8" cy="6.5" r="1" fill="white" />
-      <path d="M8 16L10 14L12 16" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M16 14V17" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M14 17H18" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  ),
 };
 
 // Floating Icon Component with physics-based smooth motion
@@ -84,10 +74,13 @@ const FloatingIcon = ({ icon, index, total, isMobile }) => {
   const shouldReduceMotion = useReducedMotion();
 
   // Slower speed on mobile to save battery
-  const speed = isMobile ? 0.00005 : 0.0001;
+  const speed = isMobile ? 0.00008 : 0.00015;
 
   useAnimationFrame((time, delta) => {
-    if (shouldReduceMotion) return;
+    // Always animate on desktop, respect reduced motion only on mobile
+    if (shouldReduceMotion && isMobile) return;
+    // Prevent huge delta spikes when DevTools opens/closes or tab loses focus
+    if (delta > 100) return;
     t.set(t.get() + delta * speed);
   });
 
@@ -140,17 +133,8 @@ const FloatingIcon = ({ icon, index, total, isMobile }) => {
 
 // Infinite Loop Container
 const IconLoop = () => {
-  const [isMobile, setIsMobile] = React.useState(
-    typeof window !== "undefined" ? window.innerWidth <= 768 : false
-  );
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // Use reactive media query hook instead of static check
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const allIcons = Object.values(SocialIcons);
   // Only show 4 icons on mobile for better performance
@@ -160,7 +144,7 @@ const IconLoop = () => {
     <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
       {visibleIcons.map((icon, i) => (
         <FloatingIcon
-          key={`${isMobile ? 'm' : 'd'}-${i}`} // Force re-mount on switch for smooth transition
+          key={`${i}-${isMobile}`} // Force re-init on breakpoint change
           icon={icon}
           index={i}
           total={visibleIcons.length}
@@ -180,7 +164,7 @@ const Hero = () => {
   const yGraphic = useTransform(scrollY, [0, 1000], [0, 200]); // Distinct layer movement
 
   return (
-    <section className="relative w-full min-h-[500px] md:min-h-[700px] lg:min-h-screen bg-transparent overflow-hidden flex items-center justify-center">
+    <section className="relative w-full min-h-[500px] md:min-h-[700px] lg:h-screen lg:-mt-20 bg-transparent overflow-hidden flex items-center justify-center">
 
       {/* Infinite Loop Icons Background with Parallax */}
       <motion.div style={{ y: yBackground }} className="absolute inset-0 z-0">

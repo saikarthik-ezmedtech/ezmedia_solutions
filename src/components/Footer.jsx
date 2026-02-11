@@ -26,14 +26,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="relative text-white overflow-hidden"
-      style={{
-        background: 'linear-gradient(180deg, #223B7E 0%, #1C3268 100%)',
-        backgroundImage: `
-          linear-gradient(180deg, #223B7E 0%, #1C3268 100%), 
-          radial-gradient(circle at top, rgba(255,255,255,0.05), transparent 60%)
-        `
-      }}
+      className="relative text-white overflow-hidden bg-[#001f3f]"
     >
       {/* Top Contact Strip */}
       <div className="border-b border-white/10 relative z-10">

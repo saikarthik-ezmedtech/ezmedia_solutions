@@ -58,8 +58,8 @@ const ServiceItem = ({ service, isActive, onHover, index }) => {
                 animate={{
                     backgroundColor: isActive ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)",
                 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="relative overflow-hidden transition-all duration-300"
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="relative overflow-hidden transition-all duration-200"
             >
                 <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 relative z-10 py-8 sm:py-10 md:py-12 min-h-[120px] sm:min-h-[150px] flex flex-col justify-center">
 
@@ -142,9 +142,11 @@ const Services = () => {
     };
 
     const handleMouseLeave = () => {
-        timeoutRef.current = setTimeout(() => {
-            setActiveService(null);
-        }, 200);
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
+        }
+        setActiveService(null);
     };
 
     return (

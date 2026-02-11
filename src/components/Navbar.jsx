@@ -111,8 +111,8 @@ const Navbar = () => {
                 alt="EZMEDIA Logo"
                 className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 transition-all duration-500"
               />
-              <span className={`text-xl sm:text-2xl lg:text-3xl font-bold transition-colors duration-500 ${themeClasses[theme].text}`}>
-                EZ<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">MEDIA</span>
+              <span className="text-xl sm:text-2xl lg:text-3xl font-bold">
+                <span className={theme === 'dark' ? 'text-white' : 'text-[#001f3f]'}>EZ</span><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">MEDIA</span>
               </span>
             </a>
           </motion.div>
