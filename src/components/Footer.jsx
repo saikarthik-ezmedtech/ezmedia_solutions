@@ -25,7 +25,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#0B0F0E] text-white">
+    <footer className="bg-[#223B7E] text-white">
       {/* Top Contact Strip */}
       <div className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-4 flex flex-col lg:flex-row justify-between items-center gap-4 text-sm text-white">
@@ -34,12 +34,8 @@ const Footer = () => {
             onClick={(e) => smoothScrollTo(e, '#home')}
             className="flex items-center cursor-pointer"
           >
-            <img
-              src="/assets/ezmedia_logo_v2 1.svg"
-              alt="EZ Media Solutions Logo"
-              className="h-14 w-14 sm:h-20 sm:w-20 object-contain"
-            />
-            <span className="text-lg sm:text-xl font-extrabold text-white ml-1" style={{ fontFamily: "'Montserrat', Arial, sans-serif", letterSpacing: '-0.02em' }}>
+            {/* Logo Image Removed */}
+            <span className="text-lg sm:text-xl font-extrabold text-white" style={{ fontFamily: "'Montserrat', Arial, sans-serif", letterSpacing: '-0.02em' }}>
               EZMEDIA SOLUTIONS
             </span>
           </a>

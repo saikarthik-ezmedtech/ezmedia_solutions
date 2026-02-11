@@ -1,162 +1,190 @@
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { motion, useMotionValue, useTransform, useAnimationFrame, useScroll, useReducedMotion } from 'framer-motion';
 
-// Minimal outline social media icons
-// Minimal outline social media icons
+// Original brand color social media icons
 const SocialIcons = {
   instagram: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#f09433" />
+          <stop offset="25%" stopColor="#e6683c" />
+          <stop offset="50%" stopColor="#dc2743" />
+          <stop offset="75%" stopColor="#cc2366" />
+          <stop offset="100%" stopColor="#bc1888" />
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig-grad)" />
+      <path d="M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7ZM12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12C15 13.6569 13.6569 15 12 15Z" fill="white" />
+      <circle cx="17.5" cy="6.5" r="1.5" fill="white" />
+      <path d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16C18.2091 20 20 18.2091 20 16V8C20 5.79086 18.2091 4 16 4ZM17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12ZM17.5 7.5C16.9477 7.5 16.5 7.05228 16.5 6.5C16.5 5.94772 16.9477 5.5 17.5 5.5C18.0523 5.5 18.5 5.94772 18.5 6.5C18.5 7.05228 18.0523 7.5 17.5 7.5Z" fill="white" opacity="0" />
+    </svg>
+  ),
+  youtube: (
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" fill="#FF0000" />
     </svg>
   ),
   facebook: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="11" fill="#1877F2" />
+      <path d="M13.5 12H15.5L16 9H13.5V7.5C13.5 6.9 13.5 6 15 6H16V3.5C16 3.5 14.8 3.5 13.5 3.5C11 3.5 9.5 5 9.5 8V9H7.5V12H9.5V20H13.5V12Z" fill="white" />
     </svg>
   ),
   twitter: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 4l11.733 16h4.267l-11.733-16z" />
-      <path d="M4 20l6.4-8" />
-      <path d="M20 4l-6.4 8" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="11" fill="black" />
+      <path d="M16.5 7H14.9L12.7 9.6L10.9 7H7L11.5 13.5L6.5 19H8.1L10.7 16L12.9 19H17L12.1 12.1L16.5 7ZM15.5 18H14.6L8.8 8H9.7L15.5 18Z" fill="white" />
     </svg>
   ),
   linkedin: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="3" />
-      <path d="M8 11v5" />
-      <path d="M8 8v.01" />
-      <path d="M12 16v-5" />
-      <path d="M16 16v-3a2 2 0 00-4 0" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <rect x="2" y="2" width="20" height="20" rx="4" fill="#0A66C2" />
+      <path d="M8 19H5V10H8V19ZM6.5 8.7C5.5 8.7 4.7 7.9 4.7 6.9C4.7 5.9 5.5 5 6.5 5C7.5 5 8.3 5.9 8.3 6.9C8.3 7.9 7.5 8.7 6.5 8.7ZM19 19H16V13.8C16 12.5 15.5 11.6 14.4 11.6C13.5 11.6 13 12.2 12.8 12.8C12.7 13 12.7 13.3 12.7 13.6V19H9.7C9.7 19 9.8 10.8 9.7 10H12.7V11.3C13.1 10.7 13.8 9.8 15.4 9.8C17.4 9.8 19 11.1 19 13.9V19Z" fill="white" />
     </svg>
   ),
   metaAds: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M8.5 14.5c-1.5 1.5-3.5 1.5-4.5 0s-1-3.5 1-4.5 4-1 5 1m0 0c1.5 2.5 4 4.5 6 4.5s2.5-1.5 2.5-2.5-1-2.5-2.5-2.5-4.5 2-6 4.5z" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M12 12C10 12 8.5 14 6.5 14C4.5 14 3.5 12.5 3.5 10.5C3.5 8.5 5 7 7 7C9 7 10.5 8.5 11.5 10C12.5 11.5 14 13 16 13C18 13 19.5 11.5 19.5 9.5C19.5 7.5 18 6 16 6C13.5 6 12 8.5 12 8.5" stroke="#0668E1" strokeWidth="2.5" strokeLinecap="round" />
     </svg>
   ),
   googleAds: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2L3 22h18L12 2z" />
-      <path d="M12 2l4.5 10H7.5L12 2z" fill="currentColor" opacity="0.2" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M15 3H21V9" stroke="#EA4335" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9 21H3V15" stroke="#4285F4" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M21 3L13.5 10.5" stroke="#FBBC05" strokeWidth="3" strokeLinecap="round" />
+      <path d="M3 21L10.5 13.5" stroke="#34A853" strokeWidth="3" strokeLinecap="round" />
     </svg>
   ),
   seo: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="11" cy="11" r="8" />
-      <path d="M21 21l-4.35-4.35" />
-      <path d="M8 11h6" />
-      <path d="M11 8v6" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <circle cx="11" cy="11" r="8" stroke="#0F9D58" strokeWidth="2" />
+      <path d="M21 21L16.65 16.65" stroke="#0F9D58" strokeWidth="2" strokeLinecap="round" />
+      <path d="M8 12L10 14L15 9" stroke="#0F9D58" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
   webDesign: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M8 21h8" />
-      <path d="M12 17v4" />
-      <path d="M6 8l2 2-2 2" />
-      <path d="M18 12l-2-2 2-2" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <rect x="2" y="4" width="20" height="16" rx="2" fill="#7E22CE" />
+      <path d="M2 9H22" stroke="white" strokeWidth="1.5" />
+      <circle cx="5" cy="6.5" r="1" fill="white" />
+      <circle cx="8" cy="6.5" r="1" fill="white" />
+      <path d="M8 16L10 14L12 16" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 14V17" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M14 17H18" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   ),
 };
 
-// Floating social icon component
-const FloatingSocialIcon = ({ icon, delay, className, colorClass = "bg-white/80" }) => (
-  <motion.div
-    className={`absolute z-20 w-14 h-14 rounded-full ${colorClass} backdrop-blur-md flex items-center justify-center cursor-pointer shadow-lg border border-white/50 transition-all duration-300 ${className}`}
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{
-      opacity: 1,
-      scale: 1,
-      y: [0, -15, 0],
-    }}
-    transition={{
-      opacity: { duration: 0.5, delay },
-      scale: { duration: 0.5, delay },
-      y: {
-        duration: 4 + Math.random() * 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: delay + 0.5
-      }
-    }}
-    whileHover={{
-      scale: 1.2,
-      rotate: [0, -5, 5, 0],
-      boxShadow: "0 25px 30px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08)",
-      transition: { duration: 0.3 }
-    }}
-  >
-    <div className="w-7 h-7">
-      {icon}
+// Floating Icon Component with physics-based smooth motion
+// Floating Icon Component with optimized mobile performance
+const FloatingIcon = ({ icon, index, total, isMobile }) => {
+  const phase = (index / total) * Math.PI * 2;
+  const t = useMotionValue(phase);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Slower speed on mobile to save battery
+  const speed = isMobile ? 0.00005 : 0.0001;
+
+  useAnimationFrame((time, delta) => {
+    if (shouldReduceMotion) return;
+    t.set(t.get() + delta * speed);
+  });
+
+  // Optimized transforms
+  // Mobile: use pixels (lighter), reduced scale/opacity range
+  // Desktop: use vw/vh (responsive), full scale/opacity range, z-index depth
+
+  const x = useTransform(t, v =>
+    isMobile ? Math.sin(v) * 120 : `${Math.sin(v) * 48}vw`
+  );
+
+  const y = useTransform(t, v =>
+    isMobile ? Math.sin(v * 2) * 90 : `${Math.sin(v * 2) * 28}vh`
+  );
+
+  const scale = useTransform(t, v =>
+    isMobile ? 0.9 + Math.cos(v) * 0.1 : 0.8 + Math.cos(v) * 0.3
+  );
+
+  const opacity = useTransform(t, v =>
+    isMobile ? 0.5 + Math.cos(v) * 0.25 : 0.6 + Math.cos(v) * 0.4
+  );
+
+  // Z-index only on desktop to prevent layout thrashing on mobile
+  const zIndex = useTransform(t, v =>
+    !isMobile && Math.cos(v) > 0 ? 10 : 0
+  );
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      style={{
+        x,
+        y,
+        scale,
+        opacity,
+        zIndex,
+        willChange: "transform"
+      }}
+      className="absolute w-12 h-12 md:w-16 md:h-16 flex items-center justify-center"
+    >
+      <div className="w-10 h-10 md:w-12 md:h-12 drop-shadow-lg">
+        {icon}
+      </div>
+    </motion.div>
+  );
+};
+
+// Infinite Loop Container
+const IconLoop = () => {
+  // Mobile detection
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+
+  const allIcons = Object.values(SocialIcons);
+  // Only show 4 icons on mobile for better performance
+  const visibleIcons = isMobile ? allIcons.slice(0, 4) : allIcons;
+
+  return (
+    <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+      {visibleIcons.map((icon, i) => (
+        <FloatingIcon
+          key={i}
+          icon={icon}
+          index={i}
+          total={visibleIcons.length}
+          isMobile={isMobile}
+        />
+      ))}
     </div>
-  </motion.div>
-);
+  );
+};
 
 const Hero = () => {
-  return (
-    <section className="relative w-full min-h-screen bg-transparent overflow-hidden">
+  const { scrollY } = useScroll();
 
-      {/* Scattered Social Media Icons */}
-      <div className="hidden md:block">
-        <FloatingSocialIcon
-          icon={SocialIcons.instagram}
-          delay={0.8}
-          className="top-[22%] left-[4%] md:left-[2%] lg:left-[4%]"
-          colorClass="bg-pink-50/90 text-pink-600"
-        />
-        <FloatingSocialIcon
-          icon={SocialIcons.facebook}
-          delay={0.9}
-          className="top-[35%] right-[4%] md:right-[10%] lg:right-[15%]"
-          colorClass="bg-blue-50/90 text-blue-700"
-        />
-        <FloatingSocialIcon
-          icon={SocialIcons.twitter}
-          delay={1.0}
-          className="bottom-[18%] left-[4%] md:left-[5%] lg:left-[8%]"
-          colorClass="bg-slate-50/90 text-slate-900"
-        />
-        <FloatingSocialIcon
-          icon={SocialIcons.linkedin}
-          delay={1.1}
-          className="top-[52%] right-[2%] md:right-[4%] lg:right-[6%]"
-          colorClass="bg-cyan-50/90 text-cyan-700"
-        />
-        <FloatingSocialIcon
-          icon={SocialIcons.metaAds}
-          delay={1.2}
-          className="bottom-[35%] right-[8%] md:right-[15%] lg:right-[20%]"
-          colorClass="bg-indigo-50/90 text-indigo-600"
-        />
-        <FloatingSocialIcon
-          icon={SocialIcons.googleAds}
-          delay={1.3}
-          className="top-[58%] left-[2%] md:left-[4%] lg:left-[6%]"
-          colorClass="bg-yellow-50/90 text-yellow-600"
-        />
-        <FloatingSocialIcon
-          icon={SocialIcons.seo}
-          delay={1.4}
-          className="bottom-[10%] right-[4%] md:right-[8%] lg:right-[12%]"
-          colorClass="bg-emerald-50/90 text-emerald-600"
-        />
-        <FloatingSocialIcon
-          icon={SocialIcons.webDesign}
-          delay={1.5}
-          className="top-[20%] right-[8%] md:right-[12%] lg:right-[18%]"
-          colorClass="bg-purple-50/90 text-purple-600"
-        />
-      </div>
+  // Parallax effects
+  const yBackground = useTransform(scrollY, [0, 1000], [0, 400]); // Moves down significantly to create depth
+  const yText = useTransform(scrollY, [0, 1000], [0, 100]); // Subtle shift
+  const yGraphic = useTransform(scrollY, [0, 1000], [0, 200]); // Distinct layer movement
+
+  return (
+    <section className="relative w-full min-h-screen bg-transparent overflow-hidden flex items-center justify-center">
+
+      {/* Infinite Loop Icons Background with Parallax */}
+      <motion.div style={{ y: yBackground }} className="absolute inset-0 z-0">
+        <IconLoop />
+      </motion.div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-24 sm:pt-32 pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center">
 
           {/* Left Side - Text Content */}
           <motion.div
+            style={{ y: yText }}
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -204,6 +232,7 @@ const Hero = () => {
 
           {/* Right Side - Image Grid */}
           <motion.div
+            style={{ y: yGraphic }}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -229,7 +258,7 @@ const Hero = () => {
                 className="relative"
               >
                 <img
-                  src="/assets/l1.svg"
+                  src="/assets/o1.svg"
                   alt="Team member"
                   className="w-full h-auto rounded-3xl"
                 />
@@ -245,12 +274,12 @@ const Hero = () => {
                 <img
                   src="/assets/b1.svg"
                   alt="Team member"
-                  className="w-full h-auto rounded-3xl"
+                  className="w-5/6 h-full"
                 />
 
                 {/* Rocket with dashed line */}
                 <motion.div
-                  className="absolute -right-20 -top-16 hidden lg:block"
+                  className="absolute -right-20 -top-4 hidden lg:block"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 1, delay: 0.8 }}
@@ -273,7 +302,21 @@ const Hero = () => {
                 <img
                   src="/assets/l2.svg"
                   alt="Team member"
-                  className="w-full h-auto rounded-3xl"
+                  className="w-5/6 h-auto"
+                />
+              </motion.div>
+
+              {/* Bottom Right - Mobile/Tablet Filler (Rocket) */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="relative flex justify-end lg:hidden mt-8 pr-4"
+              >
+                <img
+                  src="/assets/rocket.png"
+                  alt=""
+                  className="w-32 h-32 opacity-90 object-contain"
                 />
               </motion.div>
 
