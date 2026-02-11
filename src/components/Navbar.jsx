@@ -8,19 +8,26 @@ const Navbar = () => {
   const [theme, setTheme] = useState('light'); // 'light' or 'dark'
   const { scrollY } = useScroll();
 
+  const isScrollingRef = React.useRef(false);
+
   const smoothScrollTo = (e, targetId) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Prevent multiple rapid clicks
+    if (isScrollingRef.current) return;
+    isScrollingRef.current = true;
 
     setIsOpen(false);
+
     const target = document.querySelector(targetId);
 
     if (target) {
-      const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+      const navbarHeight = 80;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
       window.scrollTo({
-        top: top,
+        top: targetPosition,
         behavior: 'smooth'
       });
     } else if (targetId === '#home') {
@@ -29,6 +36,11 @@ const Navbar = () => {
         behavior: 'smooth'
       });
     }
+
+    // Reset after scroll completes
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 1000);
   };
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -105,7 +117,7 @@ const Navbar = () => {
             transition={{ duration: 0.5 }}
             className="flex items-center"
           >
-            <a href="#home" onClick={(e) => smoothScrollTo(e, '#home')} onTouchStart={(e) => smoothScrollTo(e, '#home')} className="flex items-center space-x-0.5 cursor-pointer">
+            <a href="#home" onClick={(e) => smoothScrollTo(e, '#home')} className="flex items-center space-x-0.5 cursor-pointer">
               <img
                 src="/assets/ezmedia_logo_v2 1.svg"
                 alt="EZMEDIA Logo"
@@ -131,7 +143,6 @@ const Navbar = () => {
                   key={item.name}
                   href={item.href}
                   onClick={(e) => smoothScrollTo(e, item.href)}
-                  onTouchStart={(e) => smoothScrollTo(e, item.href)}
                   className={`transition-colors duration-500 relative group font-normal cursor-pointer py-2 ${themeClasses[theme].text}`}
                   style={{ fontFamily: 'Rubik, sans-serif' }}
                 >
@@ -149,7 +160,6 @@ const Navbar = () => {
             >
               <button
                 onClick={(e) => smoothScrollTo(e, '#contact')}
-                onTouchStart={(e) => smoothScrollTo(e, '#contact')}
                 className={`px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-500 shadow-lg ${themeClasses[theme].button}`}
               >
                 Contact us

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useMotionValue, useTransform, useAnimationFrame, useScroll, useReducedMotion } from 'framer-motion';
-import { useMediaQuery } from '../hooks/useMediaQuery';
+import { useViewportWidth } from '../hooks/useViewportWidth';
 
 // Original brand color social media icons
 const SocialIcons = {
@@ -71,37 +71,43 @@ const SocialIcons = {
 const FloatingIcon = ({ icon, index, total, isMobile }) => {
   const phase = (index / total) * Math.PI * 2;
   const t = useMotionValue(phase);
-  const shouldReduceMotion = useReducedMotion();
 
-  // Slower speed on mobile to save battery
-  const speed = isMobile ? 0.00008 : 0.00015;
+  // Different speeds for different patterns
+  // Mobile: FASTER for dynamic movement, Desktop: moderate for circular motion
+  const speed = isMobile ? 0.0004 : 0.00015;
 
   useAnimationFrame((time, delta) => {
-    // Always animate on desktop, respect reduced motion only on mobile
-    if (shouldReduceMotion && isMobile) return;
     // Prevent huge delta spikes when DevTools opens/closes or tab loses focus
     if (delta > 100) return;
     t.set(t.get() + delta * speed);
   });
 
-  // Optimized transforms
-  // Mobile: use pixels (lighter), reduced scale/opacity range
-  // Desktop: use vw/vh (responsive), full scale/opacity range, z-index depth
+  // Different animation patterns for mobile vs desktop
+  // Mobile: Diagonal wave pattern (dynamic and engaging)
+  // Desktop: Circular orbital motion (works well on large screens)
 
   const x = useTransform(t, v =>
-    isMobile ? Math.sin(v) * 120 : `${Math.sin(v) * 48}vw`
+    isMobile
+      ? `${Math.sin(v) * 100 + Math.cos(v * 1.5) * 40}px`  // Diagonal wave motion
+      : `${Math.sin(v) * 48}vw`                             // Circular motion
   );
 
   const y = useTransform(t, v =>
-    isMobile ? Math.sin(v * 2) * 90 : `${Math.sin(v * 2) * 28}vh`
+    isMobile
+      ? `${Math.cos(v) * 120 + Math.sin(v * 1.3) * 50}px`  // Diagonal wave motion
+      : `${Math.sin(v * 2) * 28}vh`                         // Circular motion
   );
 
   const scale = useTransform(t, v =>
-    isMobile ? 0.9 + Math.cos(v) * 0.1 : 0.8 + Math.cos(v) * 0.3
+    isMobile
+      ? 1.0 + Math.sin(v * 1.2) * 0.2   // More dramatic breathing
+      : 0.8 + Math.cos(v) * 0.3         // Desktop scaling
   );
 
   const opacity = useTransform(t, v =>
-    isMobile ? 0.5 + Math.cos(v) * 0.25 : 0.6 + Math.cos(v) * 0.4
+    isMobile
+      ? 0.7 + Math.sin(v * 0.8) * 0.3   // Visible fade effect
+      : 0.6 + Math.cos(v) * 0.4         // Desktop opacity
   );
 
   // Z-index only on desktop to prevent layout thrashing on mobile
@@ -122,9 +128,9 @@ const FloatingIcon = ({ icon, index, total, isMobile }) => {
         zIndex,
         willChange: "transform"
       }}
-      className="absolute w-12 h-12 md:w-16 md:h-16 flex items-center justify-center"
+      className="absolute w-16 h-16 md:w-16 md:h-16 flex items-center justify-center"
     >
-      <div className="w-10 h-10 md:w-12 md:h-12 drop-shadow-lg">
+      <div className="w-14 h-14 md:w-12 md:h-12 drop-shadow-lg">
         {icon}
       </div>
     </motion.div>
@@ -133,8 +139,9 @@ const FloatingIcon = ({ icon, index, total, isMobile }) => {
 
 // Infinite Loop Container
 const IconLoop = () => {
-  // Use reactive media query hook instead of static check
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  // Track viewport width reactively - forces remount on resize
+  const width = useViewportWidth();
+  const isMobile = width < 768;
 
   const allIcons = Object.values(SocialIcons);
   // Only show 4 icons on mobile for better performance
@@ -144,7 +151,7 @@ const IconLoop = () => {
     <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
       {visibleIcons.map((icon, i) => (
         <FloatingIcon
-          key={`${i}-${isMobile}`} // Force re-init on breakpoint change
+          key={`${i}-${Math.floor(width / 100)}`} // 🔥 Force remount on width change - fixes DevTools freeze
           icon={icon}
           index={i}
           total={visibleIcons.length}

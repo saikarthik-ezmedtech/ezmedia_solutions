@@ -6,7 +6,7 @@ const StatBox = ({ number, label, color, activeColor, neutralDim, activeDim }) =
 
     return (
         <motion.div
-            className="relative p-6 sm:p-10 flex flex-col items-center justify-center min-h-[280px] sm:min-h-[400px] cursor-pointer"
+            className="relative p-4 sm:p-10 flex flex-col items-center justify-center min-h-[180px] sm:min-h-[400px] cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -35,12 +35,12 @@ const StatBox = ({ number, label, color, activeColor, neutralDim, activeDim }) =
             {/* Content */}
             <div className="relative z-10 text-center">
                 <motion.h2
-                    className={`text-5xl sm:text-7xl md:text-8xl font-black leading-none mb-4 tracking-tighter transition-all duration-500 ${isHovered ? 'text-[#9D172D] scale-110' : 'text-gray-900 scale-100'}`}
+                    className={`text-4xl sm:text-7xl md:text-8xl font-black leading-none mb-2 sm:mb-4 tracking-tighter transition-all duration-500 ${isHovered ? 'text-[#9D172D] scale-110' : 'text-gray-900 scale-100'}`}
                 >
                     {number}
                 </motion.h2>
                 <motion.div
-                    className={`font-black text-sm tracking-widest uppercase max-w-[180px] mx-auto leading-tight transition-colors duration-500 ${isHovered ? 'text-[#9D172D]' : 'text-gray-900'}`}
+                    className={`font-black text-xs sm:text-sm tracking-widest uppercase max-w-[180px] mx-auto leading-tight transition-colors duration-500 ${isHovered ? 'text-[#9D172D]' : 'text-gray-900'}`}
                 >
                     {label}
                 </motion.div>
@@ -56,24 +56,24 @@ const MovableStats = () => {
             label: "Growth in engagement",
             color: "border-[#FFD8C4]", // Peach light
             activeColor: "border-[#FF7F5C]", // Peach bold
-            neutralDim: { w: "150px", h: "320px" }, // Tall & Thin
-            activeDim: { w: "130px", h: "350px" } // Gets Thinner & Taller
+            neutralDim: { w: "160px", h: "160px" }, // Bigger for mobile
+            activeDim: { w: "150px", h: "180px" } // Gets Thinner & Taller
         },
         {
             number: "+87K",
             label: "Active users",
             color: "border-[#D1E8FF]", // Blue light
             activeColor: "border-[#4A90E2]", // Blue bold
-            neutralDim: { w: "300px", h: "200px" }, // Wide & Short
-            activeDim: { w: "340px", h: "180px" } // Gets Wider & Shorter
+            neutralDim: { w: "180px", h: "140px" }, // Wider for mobile
+            activeDim: { w: "200px", h: "130px" } // Gets Wider & Shorter
         },
         {
             number: "+20M",
             label: "Content impressions",
             color: "border-[#FFD1E8]", // Pink light
             activeColor: "border-[#D0021B]", // Red bold
-            neutralDim: { w: "250px", h: "250px" }, // Square
-            activeDim: { w: "220px", h: "280px" } // Morphs to vertical rect
+            neutralDim: { w: "170px", h: "150px" }, // Bigger for mobile
+            activeDim: { w: "160px", h: "170px" } // Morphs to vertical rect
         }
     ];
 
