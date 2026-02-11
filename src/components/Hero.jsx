@@ -171,7 +171,15 @@ const Hero = () => {
   const yGraphic = useTransform(scrollY, [0, 1000], [0, 200]); // Distinct layer movement
 
   return (
-    <section className="relative w-full min-h-[500px] md:min-h-[700px] lg:h-screen lg:-mt-20 bg-transparent overflow-hidden flex items-center justify-center">
+    <section
+      className="relative w-full min-h-[500px] md:min-h-[700px] lg:h-screen lg:-mt-20 overflow-hidden flex items-center justify-center"
+      style={{
+        backgroundImage: 'url(/assets/herobg.svg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
 
       {/* Infinite Loop Icons Background with Parallax */}
       <motion.div style={{ y: yBackground }} className="absolute inset-0 z-0">

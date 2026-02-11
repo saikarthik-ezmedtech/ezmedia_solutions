@@ -50,30 +50,45 @@ const StatBox = ({ number, label, color, activeColor, neutralDim, activeDim }) =
 };
 
 const MovableStats = () => {
+    const [isDesktop, setIsDesktop] = React.useState(
+        typeof window !== 'undefined' ? window.innerWidth >= 1024 : false
+    );
+
+    React.useEffect(() => {
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 1024);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const stats = [
         {
             number: "+150%",
             label: "Growth in engagement",
             color: "border-[#FFD8C4]", // Peach light
             activeColor: "border-[#FF7F5C]", // Peach bold
-            neutralDim: { w: "160px", h: "160px" }, // Bigger for mobile
-            activeDim: { w: "150px", h: "180px" } // Gets Thinner & Taller
+            // Mobile: 160x160, Desktop: 250x320
+            neutralDim: { w: isDesktop ? "250px" : "160px", h: isDesktop ? "320px" : "160px" },
+            activeDim: { w: isDesktop ? "230px" : "150px", h: isDesktop ? "350px" : "180px" }
         },
         {
             number: "+87K",
             label: "Active users",
             color: "border-[#D1E8FF]", // Blue light
             activeColor: "border-[#4A90E2]", // Blue bold
-            neutralDim: { w: "180px", h: "140px" }, // Wider for mobile
-            activeDim: { w: "200px", h: "130px" } // Gets Wider & Shorter
+            // Mobile: 180x140, Desktop: 400x200
+            neutralDim: { w: isDesktop ? "400px" : "180px", h: isDesktop ? "200px" : "140px" },
+            activeDim: { w: isDesktop ? "440px" : "200px", h: isDesktop ? "180px" : "130px" }
         },
         {
             number: "+20M",
             label: "Content impressions",
             color: "border-[#FFD1E8]", // Pink light
             activeColor: "border-[#D0021B]", // Red bold
-            neutralDim: { w: "170px", h: "150px" }, // Bigger for mobile
-            activeDim: { w: "160px", h: "170px" } // Morphs to vertical rect
+            // Mobile: 170x150, Desktop: 350x350
+            neutralDim: { w: isDesktop ? "350px" : "170px", h: isDesktop ? "350px" : "150px" },
+            activeDim: { w: isDesktop ? "320px" : "160px", h: isDesktop ? "380px" : "170px" }
         }
     ];
 
