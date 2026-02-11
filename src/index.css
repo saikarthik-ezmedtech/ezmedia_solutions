@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --madison-red: #ED1C24;
+    --ez-green: #81BC65;
+    --madison-black: #0A0A0A;
+    --madison-gray: #F5F5F7;
+    --accent-color: #81BC65;
+    /* Success/Growth green */
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    border-color: theme('colors.border');
+  }
+
+  body {
+    @apply text-gray-950;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: 1.55;
+    position: relative;
+    background-color: #ffffff;
+    color: var(--madison-black);
+    font-weight: 500;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-weight: 800;
+    /* Hero Headings */
+    font-size: clamp(3rem, 8vw, 7rem);
+  }
+
+  h2 {
+    font-weight: 700;
+    /* Section Titles */
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+
+  p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  button,
+  a {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer utilities {
+  .text-madison-red {
+    color: var(--madison-red);
+  }
+
+  .bg-madison-red {
+    background-color: var(--madison-red);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#ED1C24] to-[#B0141A];
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/30 border border-white/20;
+  }
+
+  .parallax-bg {
+    @apply absolute inset-0 -z-10 pointer-events-none;
+  }
+
+  /* User Requested Hero Implementation (FINAL) */
+  .hero-section {
+    position: relative;
+    height: 100vh;
+    background: #020504;
+    overflow: hidden;
+  }
+
+  #hero-lottie {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  #hero-lottie svg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 22, 18, 0.85);
+    z-index: 2;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+  }
+
+  .reveal-text {
+    overflow: hidden;
+    display: inline-block;
+  }
+}
+
+/* Smooth scrolling and prevent horizontal overflow */
+html {
+  scroll-behavior: initial;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+#root {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Custom scrollbar - Hidden to use Custom Component */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* GPU acceleration for smooth animations */
+section,
+[class*="motion"],
+.transform {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
