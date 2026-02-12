@@ -222,11 +222,10 @@ const Hero = () => {
               Let's not play games here. What do you really want from a marketing agency? If you need a growth strategy  good website or great SEO + AEO + GEO , then you're in the right place.
             </p>
 
-            {/* CTA Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gray-900 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors shadow-lg"
+              className="bg-gray-900 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full font-semibold text-xs sm:text-sm hover:bg-gray-800 transition-colors shadow-lg"
               onClick={() => {
                 const target = document.querySelector('#contact');
                 if (target) {

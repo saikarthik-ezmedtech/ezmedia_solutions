@@ -8,15 +8,19 @@ const FeatureCard = ({ icon, title, description, colorClass, iconColor }) => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         whileHover={{ y: -10 }}
-        className="bg-white rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 shadow-xl shadow-gray-200/50 flex flex-col items-center text-center group transition-all duration-500 h-full border border-gray-100 hover:border-gray-200 hover:shadow-2xl hover:shadow-gray-300/50"
+        className="bg-white rounded-[28px] sm:rounded-[40px] p-6 shadow-xl shadow-gray-200/50 flex flex-col sm:items-center sm:text-center items-start text-left group transition-all duration-500 h-full border border-gray-100 hover:border-gray-200 hover:shadow-2xl hover:shadow-gray-300/50"
     >
-        <div className={`w-14 h-14 sm:w-20 sm:h-20 ${colorClass} rounded-full flex items-center justify-center mb-6 sm:mb-8 group-hover:scale-110 transition-transform duration-500`}>
-            <div className={`text-2xl sm:text-3xl ${iconColor}`}>
-                {icon}
+        {/* Icon and Title Row for Mobile, Column for Desktop */}
+        <div className="flex flex-row sm:flex-col items-center justify-start sm:justify-center gap-4 sm:gap-0 w-full mb-4 sm:mb-0">
+            <div className={`w-12 h-12 sm:w-20 sm:h-20 ${colorClass} rounded-full flex items-center justify-center sm:mb-8 group-hover:scale-110 transition-transform duration-500 flex-shrink-0`}>
+                <div className={`text-xl sm:text-3xl ${iconColor}`}>
+                    {icon}
+                </div>
             </div>
+            <h4 className="text-base sm:text-2xl font-bold text-gray-900 sm:mb-4 leading-tight">{title}</h4>
         </div>
-        <h4 className="text-lg sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">{title}</h4>
-        <p className="text-gray-500 leading-relaxed max-w-[280px] text-sm sm:text-base">
+
+        <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
             {description}
         </p>
     </motion.div>

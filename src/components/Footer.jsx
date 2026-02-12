@@ -30,19 +30,24 @@ const Footer = () => {
     >
       {/* Top Contact Strip */}
       <div className="border-b border-white/10 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-4 flex flex-col lg:flex-row justify-between items-center gap-4 text-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-4 flex flex-col lg:flex-row justify-between items-center gap-4">
           <a
             href="#home"
             onClick={(e) => smoothScrollTo(e, '#home')}
             className="flex items-center cursor-pointer"
           >
-            {/* Logo Image Removed */}
             <span className="text-lg sm:text-xl font-extrabold text-white" style={{ fontFamily: "'Glacial Indifference', sans-serif" }}>
               EZMEDIA SOLUTIONS
             </span>
           </a>
-          <p className="flex items-center gap-2 text-xs sm:text-sm text-white/78"><FaEnvelope className="text-white" /> info@ezmediasolutions.com</p>
-          <p className="text-xs sm:text-sm text-center text-white/78">📍 3423 Piedmont Rd NE,<br />Atlanta, GA 30305, United States</p>
+          <div className="flex flex-row flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[10px] sm:text-sm text-white/90">
+            <p className="flex items-center gap-2 whitespace-nowrap">
+              <FaEnvelope className="text-white" /> info@ezmediasolutions.com
+            </p>
+            <p className="flex items-center gap-2 whitespace-nowrap">
+              <span>📍</span> 3423 Piedmont Rd NE, Atlanta, GA 30305
+            </p>
+          </div>
         </div>
       </div>
 
@@ -109,9 +114,8 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
       <div className="border-t border-white/10 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-6 sm:py-8 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-[10px] sm:text-[11px] text-white/45">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-6 sm:py-8 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-[10px] sm:text-[11px] text-white">
           <p>© 2026 EZ Media Solutions. All rights reserved.</p>
           <div className="flex gap-6">
             <span className="hover:text-[#81BC65] cursor-pointer transition-colors duration-300">
