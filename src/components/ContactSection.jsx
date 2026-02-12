@@ -56,7 +56,7 @@ const ContactSection = () => {
                                 strokeWidth="1.5"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                className="text-gray-900 absolute -top-16 -left-10"
+                                className="text-gray-900 absolute -top-8 sm:-top-16 -left-4 sm:-left-10"
                             >
                                 <path d="M90 10L10 50L40 60L50 90L90 10Z" />
                                 <path d="M40 60L90 10" />

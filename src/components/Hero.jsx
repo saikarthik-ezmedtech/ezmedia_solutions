@@ -200,10 +200,10 @@ const Hero = () => {
           >
             {/* Main Headline */}
             <div className="relative">
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight">
-                Digital
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
+                Where Creativity
                 <br />
-                marketing
+                Meets Conversion.
               </h1>
 
               {/* W scribble near headline */}
@@ -219,7 +219,7 @@ const Hero = () => {
 
             {/* Subtext */}
             <p className="text-gray-600 text-sm sm:text-base lg:text-lg max-w-md leading-relaxed">
-              Let's not play games here. What do you really want from a marketing agency? If you need a good website, great SEO or growth strategy, then you're in the right place.
+              Let's not play games here. What do you really want from a marketing agency? If you need a growth strategy good website or great SEO , then you're in the right place.
             </p>
 
             {/* CTA Button */}
@@ -234,7 +234,7 @@ const Hero = () => {
                 }
               }}
             >
-              Contact
+              Connect now
             </motion.button>
           </motion.div>
 

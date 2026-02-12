@@ -7,20 +7,24 @@ const FAQ = () => {
 
     const faqs = [
         {
-            question: "How long does it take to see results?",
-            answer: "Measurable improvements typically appear in 60-90 days. SEO efforts mature in 3-6 months, while our strategies generate leads within weeks."
+            question: "What services does EZ MEDIA provide?",
+            answer: "EZ MEDIA offers end-to-end marketing solutions including creative branding, social media management, paid advertising across major platforms, SEO & AEO optimization, competitor research, audience analysis, and performance-driven campaign management."
         },
         {
-            question: "Do you work with all medical practices?",
-            answer: "Yes! We specialize in dental, wellness centers, and cosmetic surgery. Our AI models ensure healthcare compliance and relevance."
+            question: "How do you measure marketing performance?",
+            answer: "We track and report key performance indicators such as ROAS, conversion rate, CPA, CTR, and overall revenue impact through structured analytics and transparent reporting systems."
         },
         {
-            question: "What makes your AI automation different?",
-            answer: "Our systems are trained strictly on healthcare datasets, ensuring HIPAA compliance and accurate medical terminology."
+            question: "Do you manage campaigns across multiple platforms?",
+            answer: "Yes. We run and optimize campaigns across Google, Meta, TikTok, Snapchat, LinkedIn, Bing, and Apple, ensuring integrated cross-platform growth."
+        },
+        {
+            question: "Do you offer complete campaign management?",
+            answer: "Yes. From strategy and planning to setup, creative coordination, optimization, tracking, and reporting — we handle the entire lifecycle of your marketing campaigns."
         },
         {
             question: "What is your pricing model?",
-            answer: "We offer transparent, tiered packages based on practice size and goals. We have a solution that scales with your growth."
+            answer: "Our pricing is customized based on your business objectives, scope of work, and growth requirements. We develop tailored proposals to ensure strategic alignment and measurable impact."
         }
     ];
 

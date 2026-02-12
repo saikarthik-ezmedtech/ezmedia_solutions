@@ -26,7 +26,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="relative text-white overflow-hidden bg-[#001f3f]"
+      className="relative text-white overflow-hidden bg-[#252b6e]"
     >
       {/* Top Contact Strip */}
       <div className="border-b border-white/10 relative z-10">
@@ -37,7 +37,7 @@ const Footer = () => {
             className="flex items-center cursor-pointer"
           >
             {/* Logo Image Removed */}
-            <span className="text-lg sm:text-xl font-extrabold text-white" style={{ fontFamily: "'Montserrat', Arial, sans-serif", letterSpacing: '-0.02em' }}>
+            <span className="text-lg sm:text-xl font-extrabold text-white" style={{ fontFamily: "'Glacial Indifference', sans-serif" }}>
               EZMEDIA SOLUTIONS
             </span>
           </a>

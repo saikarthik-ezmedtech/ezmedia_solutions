@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiTrendingUp, FiThumbsUp, FiActivity } from 'react-icons/fi';
+import { FiTrendingUp, FiThumbsUp, FiActivity, FiBarChart } from 'react-icons/fi';
 
 const FeatureCard = ({ icon, title, description, colorClass, iconColor }) => (
     <motion.div
@@ -8,7 +8,7 @@ const FeatureCard = ({ icon, title, description, colorClass, iconColor }) => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         whileHover={{ y: -10 }}
-        className="bg-white rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 shadow-xl shadow-gray-200/50 flex flex-col items-center text-center group transition-all duration-500"
+        className="bg-white rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 shadow-xl shadow-gray-200/50 flex flex-col items-center text-center group transition-all duration-500 h-full border border-gray-100 hover:border-gray-200 hover:shadow-2xl hover:shadow-gray-300/50"
     >
         <div className={`w-14 h-14 sm:w-20 sm:h-20 ${colorClass} rounded-full flex items-center justify-center mb-6 sm:mb-8 group-hover:scale-110 transition-transform duration-500`}>
             <div className={`text-2xl sm:text-3xl ${iconColor}`}>
@@ -26,10 +26,17 @@ const FeatureCards = () => {
     const features = [
         {
             icon: <FiTrendingUp />,
-            title: "Search Engine Optimization",
-            description: "Boost your visibility and drive organic traffic with our expert-led SEO strategies.",
+            title: "Performance Marketing",
+            description: "Drive measurable growth and increase conversions with data-driven Meta and Google ad campaigns.",
             colorClass: "bg-blue-50",
             iconColor: "text-blue-500"
+        },
+        {
+            icon: <FiActivity />,
+            title: "Search Engine Optimization",
+            description: "Boost your visibility and drive organic traffic with our expert-led SEO strategies.",
+            colorClass: "bg-emerald-50",
+            iconColor: "text-emerald-500"
         },
         {
             icon: <FiThumbsUp />,
@@ -39,7 +46,7 @@ const FeatureCards = () => {
             iconColor: "text-pink-500"
         },
         {
-            icon: <FiActivity />,
+            icon: <FiBarChart />,
             title: "Reporting & Analysis",
             description: "Get crystal clear insights into your performance with our detailed reporting systems.",
             colorClass: "bg-amber-50",
@@ -49,8 +56,8 @@ const FeatureCards = () => {
 
     return (
         <section className="pt-8 pb-16 sm:pb-24 relative z-10 bg-transparent">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10">
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                     {features.map((feature, index) => (
                         <FeatureCard key={index} {...feature} />
                     ))}
