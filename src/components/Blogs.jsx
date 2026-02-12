@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSearch, FiArrowRight, FiChevronDown } from 'react-icons/fi';
+import { FiArrowRight, FiChevronDown } from 'react-icons/fi';
 
 const blogData = [
     {
@@ -150,7 +150,7 @@ const Blogs = () => {
                 </div>
 
                 {/* Filter Bar */}
-                <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch lg:items-center justify-between mb-8 sm:mb-12 p-2 bg-gray-50 rounded-[24px] sm:rounded-[40px] border border-gray-100">
+                <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch lg:items-center justify-center mb-8 sm:mb-12 p-2 bg-gray-50 rounded-[24px] sm:rounded-[40px] border border-gray-100">
                     <div className="flex flex-wrap gap-2 p-1">
                         {categories.map((cat) => (
                             <button
@@ -164,17 +164,6 @@ const Blogs = () => {
                                 {cat}
                             </button>
                         ))}
-                    </div>
-
-                    <div className="relative w-full lg:w-96 px-2 sm:px-4">
-                        <FiSearch className="absolute left-6 sm:left-8 top-1/2 -translate-y-1/2 text-gray-400 text-lg sm:text-xl" />
-                        <input
-                            type="text"
-                            placeholder="Search across articles..."
-                            value={searchQuery}
-                            onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                            className="w-full bg-white border border-gray-100 rounded-full py-3 sm:py-4 pl-10 sm:pl-12 pr-4 sm:pr-6 focus:outline-none focus:ring-2 focus:ring-gray-900/5 transition-all text-sm font-medium"
-                        />
                     </div>
                 </div>
 

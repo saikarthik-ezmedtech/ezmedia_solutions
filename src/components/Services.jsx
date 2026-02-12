@@ -151,7 +151,7 @@ const Services = () => {
 
     return (
         <section
-            className="relative pt-16 sm:pt-24 pb-16 sm:pb-24 bg-[#020504] overflow-hidden"
+            className="relative pt-16 sm:pt-24 pb-1 sm:pb-2 bg-[#020504] overflow-hidden"
             id="services"
         >
             {/* Background Pattern */}

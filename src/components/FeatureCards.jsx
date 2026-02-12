@@ -33,8 +33,8 @@ const FeatureCards = () => {
         },
         {
             icon: <FiActivity />,
-            title: "Search Engine Optimization",
-            description: "Boost your visibility and drive organic traffic with our expert-led SEO strategies.",
+            title: "SEO + AEO + GEO",
+            description: "Own search rankings and AI-driven discovery with strategic SEO that drives qualified, high-intent traffic.",
             colorClass: "bg-emerald-50",
             iconColor: "text-emerald-500"
         },

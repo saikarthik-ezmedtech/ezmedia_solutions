@@ -34,7 +34,7 @@ const Clients = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
 
-                <Marquee gradient={false} speed={80} pauseOnHover={false} className="py-2">
+                <Marquee gradient={false} speed={45} pauseOnHover={false} className="py-2">
                     {duplicatedLogos.map((logo, index) => (
                         <div key={index} className="mx-6 md:mx-8 group transition-all duration-300 flex items-center justify-center w-40 md:w-56 h-16 md:h-24">
                             <motion.img

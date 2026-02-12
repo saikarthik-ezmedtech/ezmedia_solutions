@@ -219,7 +219,7 @@ const Hero = () => {
 
             {/* Subtext */}
             <p className="text-gray-600 text-sm sm:text-base lg:text-lg max-w-md leading-relaxed">
-              Let's not play games here. What do you really want from a marketing agency? If you need a growth strategy good website or great SEO , then you're in the right place.
+              Let's not play games here. What do you really want from a marketing agency? If you need a growth strategy  good website or great SEO + AEO + GEO , then you're in the right place.
             </p>
 
             {/* CTA Button */}
