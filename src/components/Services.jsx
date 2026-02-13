@@ -151,13 +151,13 @@ const Services = () => {
 
     return (
         <section
-            className="relative pt-16 sm:pt-24 pb-1 sm:pb-2 bg-[#020504] overflow-hidden"
+            className="relative pt-16 sm:pt-24 pb-1 sm:pb-2 bg-[#252b6e] overflow-hidden"
             id="services"
         >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5 pointer-events-none">
                 <div className="w-full h-full" style={{
-                    backgroundImage: `repeating-linear-gradient(45deg, #111 0px, #111 1px, transparent 1px, transparent 10px)`
+                    backgroundImage: `repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 10px)`
                 }} />
             </div>
 
