@@ -6,33 +6,47 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [theme, setTheme] = useState("light");
+
   const { scrollY } = useScroll();
+  const isProgrammaticScroll = useRef(false);
 
-  const isInteractingRef = useRef(false);
-
+  /* ---------------------------------------
+     SCROLL TO SECTION (FIXED)
+  ---------------------------------------- */
   const scrollTo = (id) => {
-    isInteractingRef.current = true;
+    isProgrammaticScroll.current = true;
+    setHidden(false);
     setIsOpen(false);
 
-    if (id === "#home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
+    let targetY = 0;
+
+    if (id !== "#home") {
       const el = document.querySelector(id);
-      if (el) {
-        const y = el.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
+      if (!el) return;
+
+      targetY = el.getBoundingClientRect().top + window.scrollY - 80;
     }
 
+    window.scrollTo({
+      top: targetY,
+      behavior: "smooth",
+    });
+
+    // Unlock scroll logic after animation finishes
     setTimeout(() => {
-      isInteractingRef.current = false;
-    }, 600);
+      isProgrammaticScroll.current = false;
+    }, 800);
   };
 
+  /* ---------------------------------------
+     AUTO HIDE NAVBAR ON SCROLL
+  ---------------------------------------- */
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (isInteractingRef.current) return;
+    if (isProgrammaticScroll.current) return;
 
     const previous = scrollY.getPrevious();
+    if (!previous) return;
+
     if (latest > previous && latest > 150) {
       setHidden(true);
     } else {
@@ -40,16 +54,21 @@ const Navbar = () => {
     }
   });
 
+  /* ---------------------------------------
+     THEME SWITCH BASED ON SECTIONS
+  ---------------------------------------- */
   useEffect(() => {
     const handleScroll = () => {
       const darkSections = ["services", "testimonials"];
       let dark = false;
 
       darkSections.forEach((id) => {
-        const s = document.getElementById(id);
-        if (s) {
-          const r = s.getBoundingClientRect();
-          if (r.top <= 40 && r.bottom >= 40) dark = true;
+        const section = document.getElementById(id);
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 40 && rect.bottom >= 40) {
+          dark = true;
         }
       });
 
@@ -58,9 +77,13 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /* ---------------------------------------
+     MENU ITEMS
+  ---------------------------------------- */
   const menuItems = [
     { name: "Services", href: "#services" },
     { name: "Clients", href: "#clients" },
@@ -86,7 +109,8 @@ const Navbar = () => {
     <motion.nav
       animate={{ y: hidden ? "-100%" : "0%" }}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className={`fixed top-0 left-0 right-0 z-[9999] transition-colors duration-500 ${themeClasses[theme].nav} pointer-events-auto`}
+      style={{ pointerEvents: hidden ? "none" : "auto" }}
+      className={`fixed top-0 left-0 right-0 z-[9999] transition-colors duration-500 ${themeClasses[theme].nav}`}
     >
       <div className="w-full px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
@@ -111,38 +135,38 @@ const Navbar = () => {
             </span>
           </button>
 
-          {/* Desktop Menu + Contact Button */}
+          {/* DESKTOP MENU */}
           <div className="hidden lg:flex items-center space-x-8">
             <div className="flex items-center space-x-8">
               {menuItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => scrollTo(item.href)}
-                  className={`transition-colors duration-500 relative group font-normal cursor-pointer py-2 ${themeClasses[theme].text}`}
+                  className={`relative group py-2 font-normal transition-colors duration-500 ${themeClasses[theme].text}`}
                   style={{ fontFamily: "'Glacial Indifference', sans-serif" }}
                 >
                   {item.name}
                   <span
-                    className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${theme === "dark" ? "bg-white" : "bg-gray-900"
-                      }`}
+                    className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${
+                      theme === "dark" ? "bg-white" : "bg-gray-900"
+                    }`}
                   />
                 </button>
               ))}
             </div>
 
-            {/* Contact Us Button */}
             <button
               onClick={() => scrollTo("#contact")}
-              className={`px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-500 shadow-lg ${themeClasses[theme].button}`}
+              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-500 shadow-lg ${themeClasses[theme].button}`}
             >
               Contact us
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* MOBILE TOGGLE */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden p-2 focus:outline-none transition-colors duration-500 z-50 ${themeClasses[theme].text}`}
+            className={`lg:hidden p-2 transition-colors duration-500 z-50 ${themeClasses[theme].text}`}
             aria-label="Toggle menu"
           >
             {isOpen ? <HiX size={32} /> : <HiMenuAlt4 size={32} />}
@@ -153,26 +177,26 @@ const Navbar = () => {
       {/* MOBILE MENU */}
       {isOpen && (
         <div
-          className={`lg:hidden border-t ${theme === "dark"
+          className={`lg:hidden border-t ${
+            theme === "dark"
               ? "bg-black/95 backdrop-blur-md text-white border-white/10"
               : "bg-white/95 backdrop-blur-md text-gray-900 border-gray-200"
-            }`}
+          }`}
         >
           <div className="px-6 py-4 space-y-2">
             {menuItems.map((item) => (
               <button
                 key={item.name}
-                type="button"
-                className="block w-full text-left font-medium py-3 px-2 transition-colors hover:opacity-70 touch-manipulation"
                 onClick={() => scrollTo(item.href)}
+                className="block w-full text-left py-3 px-2 font-medium transition-opacity hover:opacity-70 touch-manipulation"
               >
                 {item.name}
               </button>
             ))}
+
             <button
-              type="button"
-              className={`w-full mt-4 px-6 py-3 rounded-full font-semibold text-sm ${themeClasses[theme].button} touch-manipulation`}
               onClick={() => scrollTo("#contact")}
+              className={`w-full mt-4 px-6 py-3 rounded-full text-sm font-semibold ${themeClasses[theme].button}`}
             >
               Contact us
             </button>
