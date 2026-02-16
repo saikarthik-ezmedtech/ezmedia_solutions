@@ -183,7 +183,7 @@ const Navbar = () => {
 
       {/* MOBILE MENU */}
       {isOpen && (
-        <div className="lg:hidden bg-black/95 text-white">
+        <div className="lg:hidden bg-white text-gray-900">
           <div className="px-6 py-4 space-y-2">
             {menuItems.map((item) => (
               <button
