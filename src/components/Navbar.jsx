@@ -189,7 +189,7 @@ const Navbar = () => {
               <button
                 key={item.name}
                 onClick={() => scrollTo(item.href)}
-                className="block w-full py-3 text-left"
+                className="block w-full py-3 text-left font-normal"
               >
                 {item.name}
               </button>
