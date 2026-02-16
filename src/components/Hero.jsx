@@ -201,9 +201,9 @@ const Hero = () => {
             {/* Main Headline */}
             <div className="relative">
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
-                Where Creativity
+                Where <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Creativity</span>
                 <br />
-                Meets Conversion.
+                Meets <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Conversion</span>.
               </h1>
 
               {/* W scribble near headline */}
