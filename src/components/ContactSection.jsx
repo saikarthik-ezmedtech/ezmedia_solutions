@@ -183,7 +183,7 @@ const ContactSection = () => {
             >
                 <div className="relative z-10 w-full max-w-6xl mx-auto">
                     <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-[#021612] mb-4 sm:mb-6 tracking-tight">
-                        Say Hello to EZMEDIA!
+                        Say Hello to <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">EZMEDIA</span>!
                     </h2>
                     <p className="text-gray-500 text-base sm:text-lg md:text-xl mb-8 sm:mb-12 max-w-lg mx-auto font-medium">
                         Sign up for Newsletter and receive updates on first project

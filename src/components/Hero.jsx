@@ -203,7 +203,7 @@ const Hero = () => {
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
                 Where <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Creativity</span>
                 <br />
-                Meets <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Conversion</span>.
+                Meets <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Conversion</span>
               </h1>
 
               {/* W scribble near headline */}
@@ -219,13 +219,21 @@ const Hero = () => {
 
             {/* Subtext */}
             <p className="text-gray-600 text-sm sm:text-base lg:text-lg max-w-md leading-relaxed">
-              Let's not play games here. What do you really want from a marketing agency? If you need a growth strategy  good website or great SEO + AEO + GEO , then you're in the right place.
+              Let's not play games here.
+              <br />
+              What do you really want from a marketing agency?
+              <br />
+              If you need a{" "}
+              <span className="font-semibold text-gray-900">Performance Marketing Strategy</span>,{" "}
+              <span className="font-semibold text-gray-900">Good Website</span>,{" "}
+              <span className="font-semibold text-gray-900">Great SEO + AEO + GEO</span> and{" "}
+              <span className="font-semibold text-gray-900">Social Media Management</span> for your brand then you're in the right place.
             </p>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gray-900 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full font-semibold text-xs sm:text-sm hover:bg-gray-800 transition-colors shadow-lg"
+              className="bg-gradient-to-r from-blue-900 to-cyan-800 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full font-semibold text-xs sm:text-sm hover:from-blue-950 hover:to-cyan-900 transition-all shadow-lg"
               onClick={() => {
                 const target = document.querySelector('#contact');
                 if (target) {

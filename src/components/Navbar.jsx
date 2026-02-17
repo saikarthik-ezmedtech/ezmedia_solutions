@@ -113,12 +113,12 @@ const Navbar = () => {
     light: {
       text: "text-gray-900",
       nav: "bg-white/10 backdrop-blur-md md:backdrop-blur-xl",
-      button: "bg-gray-900 text-white hover:bg-gray-800",
+      button: "bg-gradient-to-r from-blue-900 to-cyan-800 text-white hover:from-blue-950 hover:to-cyan-900",
     },
     dark: {
       text: "text-white",
       nav: "bg-black/20 backdrop-blur-md",
-      button: "bg-white text-black hover:bg-gray-200",
+      button: "bg-gradient-to-r from-blue-900 to-cyan-800 text-white hover:from-blue-950 hover:to-cyan-900",
     },
   };
 
@@ -140,13 +140,8 @@ const Navbar = () => {
               alt="EZMEDIA"
               className="h-12 w-12 lg:h-16 lg:w-16"
             />
-            <span className="text-2xl lg:text-3xl font-bold">
-              <span className={theme === "dark" ? "text-white" : "text-[#001f3f]"}>
-                EZ
-              </span>
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                MEDIA
-              </span>
+            <span className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+              EZMEDIA
             </span>
           </button>
 
