@@ -73,17 +73,16 @@ const ContactSection = () => {
                             </svg>
                         </div>
 
-                        <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-[1.1] mb-6 sm:mb-8 relative">
-                            Want to <span className="font-serif italic font-normal">WOW</span> Your
-                            <br />
-                            Customers
+                        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-[1.1] mb-6 sm:mb-8 relative">
+                            Ready to Scale Your Brand with a <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">360° Digital</span> Strategy?
                         </h2>
 
                         <div className="w-12 h-[2px] bg-gray-300 mb-6 sm:mb-8" />
 
                         <div className="space-y-2">
-                            <p className="text-gray-500 text-base sm:text-lg">Call us for fast support to this number.</p>
-                            <p className="text-2xl sm:text-4xl font-bold text-gray-900 tracking-tight">800 2563 123</p>
+                            <p className="text-lg sm:text-2xl font-bold text-gray-900 tracking-tight">
+                                <a href="tel:+918484084414" className="hover:text-[#9D172D] transition-colors">Connect with us @<br />+91-8484084414</a>
+                            </p>
                         </div>
                     </motion.div>
 

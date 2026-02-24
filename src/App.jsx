@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import MovableStats from './components/MovableStats';
 import FeatureCards from './components/FeatureCards';
 import AboutVideo from './components/AboutVideo';
 import Services from './components/Services';
@@ -61,7 +60,6 @@ function App() {
           }}
         />
         <Hero />
-        <MovableStats />
         <FeatureCards />
       </div>
 
